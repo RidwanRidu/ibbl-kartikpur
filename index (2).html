@@ -1,0 +1,2209 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ইসলামী ব্যাংক বাংলাদেশ পিএলসি. - কার্তিকপুর বাজার আউটলেট</title>
+    <link href="https://fonts.maateen.me/kalpurush/font.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #006400;
+            --secondary-color: #228B22;
+            --accent-color: #FFD700;
+            --text-dark: #1a1a1a;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Kalpurush', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background-color: var(--bg-light);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--bg-light);
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Popup Banner Styles - Updated for Responsiveness */
+        .popup-banner {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 10001;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            padding: 20px; /* Default padding */
+        }
+
+        .popup-banner.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .popup-content {
+            position: relative;
+            width: 800px; /* Desktop width */
+            max-width: 100%;
+            background: transparent;
+            animation: zoomIn 0.4s ease;
+            text-align: center;
+            max-height: 90vh; /* Prevents exceeding screen height */
+            overflow-y: auto; /* Scroll if image is too tall */
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .popup-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            border: 4px solid var(--accent-color);
+            max-height: 85vh; /* Ensure image fits within viewport height */
+            object-fit: contain; /* Ensures image is not cropped */
+            display: block;
+        }
+
+        .close-popup {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: var(--accent-color);
+            color: var(--primary-color);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+
+        .close-popup:hover {
+            transform: scale(1.1) rotate(90deg);
+            background: var(--white);
+        }
+
+        /* Floating Status Widget - Bottom Right */
+        .floating-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 999;
+            min-width: 200px;
+            max-width: 250px;
+            border: 2px solid var(--accent-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .floating-widget:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .widget-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .widget-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .widget-header i {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+
+        .widget-header h4 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .widget-date {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            display: block;
+            text-align: center;
+            padding: 5px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 5px;
+            margin-bottom: 8px;
+        }
+
+        .widget-bank-status {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .indicator-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            padding: 4px 0;
+        }
+
+        .status-text {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+        .dot-open { background-color: #2ecc71; box-shadow: 0 0 5px #2ecc71; animation: pulse 2s infinite; }
+        .dot-closed { background-color: #e74c3c; box-shadow: 0 0 5px #e74c3c; }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); }
+            70% { box-shadow: 0 0 0 5px rgba(46, 204, 113, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-top {
+            background: rgba(0,0,0,0.1);
+            padding: 8px 0;
+            font-size: 0.9rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 200px;
+            flex: 1;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: var(--accent-color);
+        }
+
+        .logo-text h1 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .logo-text p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .holiday-link {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: var(--white);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            min-height: 44px;
+        }
+
+        .holiday-link:hover {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(0,0,0,0.05);
+            padding: 0;
+            position: relative;
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 1002;
+            padding: 10px;
+            min-height: 44px;
+            min-width: 44px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            justify-content: center;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 150px;
+            background: linear-gradient(135deg, rgba(0,100,0,0.9), rgba(34,139,34,0.9)),
+                        url('https://islamibankbd.com/public/assets/home/slider/1748435737_10726_IBBL_10256_25%20Web%20Banner%20Edited-12.jpg') center/cover;
+            color: var(--white);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0,50 Q25,30 50,50 T100,50" stroke="rgba(255,255,255,0.05)" fill="none" stroke-width="2"/></svg>');
+            background-size: 100px 100px;
+            animation: patternMove 20s linear infinite;
+        }
+
+        @keyframes patternMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(100px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* Typing Animation Styles */
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            min-height: 3.6rem; /* Prevent layout shift */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 4px;
+            height: 1em;
+            background-color: var(--accent-color);
+            animation: blink 0.7s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 35px;
+            font-weight: 300;
+            animation: fadeInUp 1s ease 0.2s both;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .cta-button {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 14px 35px;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 44px;
+            font-size: 1.1rem;
+        }
+
+        .cta-button:hover {
+            background-color: #FFC72C;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255,215,0,0.3);
+        }
+
+        .cta-button-secondary {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .cta-button-secondary:hover {
+            background-color: var(--white);
+            color: var(--primary-color);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background: var(--bg-light);
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h3 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent-color);
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-top: 15px;
+            padding: 0 10px;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .service-item {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .service-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .service-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .service-icon i {
+            font-size: 2rem;
+            color: var(--white);
+        }
+
+        .service-item h4 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .service-item p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Calculator Section */
+        #calculators {
+            background-color: var(--white);
+            padding: 80px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'AdorshoLipi', sans-serif;
+            min-height: 44px;
+        }
+
+        button.calc-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+            font-weight: 600;
+            font-family: 'AdorshoLipi', sans-serif;
+            min-height: 44px;
+        }
+
+        button.calc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .result-box {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background-color: #e8f5e9;
+            border-left: 5px solid var(--accent-color);
+            border-radius: 4px;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 5px;
+        }
+
+        .result-row:last-child {
+            border-bottom: none;
+        }
+
+        .total-row {
+            font-weight: bold;
+            color: var(--primary-color);
+            border-top: 2px solid #ccc;
+            padding-top: 10px;
+            margin-top: 5px;
+            font-size: 1.2rem;
+        }
+
+        /* Rate Table */
+        table.rate-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-top: 2rem;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .rate-table th, .rate-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .rate-table th {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* Tabs */
+        .tabs-container {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #eee;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 25px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #666;
+            transition: 0.3s;
+            font-family: 'AdorshoLipi', sans-serif;
+            border-radius: 8px 8px 0 0;
+            min-height: 44px;
+        }
+
+        .tab-btn:hover {
+            background-color: #f0f0f0;
+            color: var(--primary-color);
+        }
+
+        .tab-btn.active {
+            color: var(--white);
+            background-color: var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        ul.doc-list {
+            list-style-type: none;
+        }
+
+        ul.doc-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 35px;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+
+        ul.doc-list li:hover {
+            background-color: #f9f9f9;
+            padding-left: 40px;
+        }
+
+        ul.doc-list li::before {
+            content: '\f00c';
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: var(--secondary-color);
+            position: absolute;
+            left: 10px;
+            top: 12px;
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background: var(--white);
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 50px;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .about-text {
+            text-align: center;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .about-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact h3 {
+            color: var(--accent-color);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .contact-card {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .contact-card:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-5px);
+        }
+
+        .contact-card i {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .contact-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .contact-info-item {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .contact-info-item i {
+            color: var(--accent-color);
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 40px 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .footer-section p, .footer-section li {
+            margin-bottom: 10px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: block;
+            padding: 3px 0;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Holiday Modal */
+        .holiday-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .holiday-modal.show {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            padding: 0;
+            border-radius: 15px;
+            max-width: 95%;
+            max-height: 90%;
+            overflow: auto;
+            position: relative;
+            animation: slideIn 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 20px;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .close-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: var(--white);
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            min-width: 40px;
+            min-height: 40px;
+        }
+
+        .close-btn:hover {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .modal-body h3 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .modal-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            text-align: left;
+            min-width: 600px;
+        }
+
+        .modal-body th, .modal-body td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .modal-body th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .modal-footer {
+            padding: 15px 20px;
+            background: var(--bg-light);
+            border-radius: 0 0 15px 15px;
+            text-align: center;
+        }
+
+        .download-btn {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 44px;
+        }
+
+        .download-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            /* Popup Responsive Adjustments */
+            .popup-banner {
+                padding: 10px;
+            }
+            
+            .popup-content {
+                width: 95%;
+                max-height: 90vh; /* Ensure it fits within screen height */
+            }
+            
+            .popup-image {
+                max-height: 80vh; /* Ensure image fits within screen height */
+                object-fit: contain; /* Prevent cropping */
+            }
+
+            .close-popup {
+                top: -12px;
+                right: -12px;
+                width: 35px;
+                height: 35px;
+                font-size: 20px;
+            }
+
+            /* ... other existing mobile styles ... */
+            .floating-widget {
+                bottom: 15px;
+                right: 15px;
+                min-width: 180px;
+                max-width: 200px;
+                padding: 12px;
+            }
+            
+            .widget-header {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .widget-date {
+                font-size: 0.75rem;
+            }
+            
+            .indicator-item {
+                font-size: 0.7rem;
+            }
+            
+            .header-top {
+                display: none;
+            }
+            
+            .header-content {
+                padding: 10px 15px;
+            }
+            
+            .logo i {
+                font-size: 1.5rem;
+            }
+            
+            .logo-text h1 {
+                font-size: 1rem;
+            }
+            
+            .logo-text p {
+                font-size: 0.8rem;
+            }
+            
+            .contact-info {
+                justify-content: center;
+                width: 100%;
+                margin-top: 10px;
+            }
+            
+            .nav-toggle {
+                display: block;
+                order: 1;
+            }
+            
+            .logo {
+                order: 0;
+            }
+            
+            .contact-info {
+                order: 2;
+                width: 100%;
+                justify-content: space-between;
+                margin-top: 10px;
+            }
+            
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--secondary-color);
+                padding: 10px 0;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+                gap: 0;
+                z-index: 1001;
+                max-height: 70vh;
+                overflow-y: auto;
+            }
+            
+            nav ul.nav-active {
+                display: flex;
+            }
+            
+            nav ul li {
+                width: 100%;
+                text-align: center;
+            }
+            
+            nav a {
+                padding: 15px 20px;
+                display: flex;
+                justify-content: center;
+                border-radius: 0;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                font-size: 1rem;
+            }
+            
+            nav ul li:last-child a {
+                border-bottom: none;
+            }
+            
+            .hero {
+                margin-top: 120px;
+                padding: 50px 0;
+                min-height: 400px;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+                padding: 0 15px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+                padding: 0 15px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                padding: 0 15px;
+            }
+            
+            .cta-button {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            .section-title h3 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title p {
+                font-size: 1rem;
+            }
+            
+            .services, .about, #calculators, .contact {
+                padding: 60px 0;
+            }
+            
+            .service-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .service-item {
+                padding: 25px;
+            }
+            
+            .calc-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .card {
+                padding: 25px;
+            }
+            
+            .tabs {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .tab-btn {
+                width: 100%;
+                text-align: center;
+                border-radius: 8px;
+                margin-bottom: 5px;
+            }
+            
+            .tabs-container {
+                padding: 25px;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .about-text h3 {
+                font-size: 1.8rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .contact-card {
+                padding: 25px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .modal-content {
+                width: 95%;
+                max-height: 85%;
+            }
+            
+            .modal-body table {
+                font-size: 0.8rem;
+                min-width: 100%;
+            }
+            
+            .modal-body th, 
+            .modal-body td {
+                padding: 8px 5px;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 991px) {
+            .floating-widget {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .service-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            
+            .calc-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .contact-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 992px) {
+            .floating-widget {
+                bottom: 30px;
+                right: 30px;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 50px;
+            }
+            
+            .service-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .contact-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Touch device improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .service-item, .contact-card, .card {
+                transition: transform 0.2s ease;
+            }
+            
+            .service-item:active, 
+            .contact-card:active, 
+            .card:active {
+                transform: scale(0.98);
+            }
+            
+            .floating-widget {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        /* iOS Safari fixes */
+        @supports (-webkit-touch-callout: none) {
+            .hero {
+                height: -webkit-fill-available;
+                min-height: -webkit-fill-available;
+            }
+            
+            input, select {
+                font-size: 16px;
+            }
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            html {
+                scroll-behavior: auto;
+            }
+            
+            .dot-open {
+                animation: none;
+            }
+            
+            .typing-cursor {
+                animation: none;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .preloader,
+            .nav-toggle,
+            .holiday-link,
+            .cta-buttons,
+            .social-links,
+            .modal-content,
+            .floating-widget,
+            .popup-banner {
+                display: none !important;
+            }
+            
+            header {
+                position: static;
+            }
+            
+            body {
+                font-size: 12pt;
+                line-height: 1.4;
+            }
+            
+            .container {
+                max-width: 100%;
+            }
+            
+            .hero, .contact {
+                background: #fff !important;
+                color: #000 !important;
+            }
+            
+            .hero::before {
+                display: none;
+            }
+        }
+
+        /* Landscape orientation for mobile */
+        @media screen and (orientation: landscape) and (max-height: 600px) {
+            .floating-widget {
+                bottom: 10px;
+                right: 10px;
+                min-width: 160px;
+                max-width: 180px;
+            }
+            
+            .hero {
+                margin-top: 120px;
+                padding: 40px 0;
+                min-height: auto;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            nav ul {
+                padding: 5px 0;
+            }
+            
+            nav a {
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Popup Banner -->
+    <div id="popupBanner" class="popup-banner">
+        <div class="popup-content">
+            <button class="close-popup" onclick="closePopup()">&times;</button>
+            <img src="https://i.postimg.cc/15f6NnnQ/Whats-App-Image-2026-01-15-at-13-21-51.jpg" alt="প্রচারণামূলক অফার" class="popup-image">
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span><i class="fas fa-clock"></i> সকাল ১০টা - বিকাল ৪টা (ব্যাংকিং কার্যদিবসে)</span>
+                    <span><i class="fas fa-phone"></i> কুইক ব্যালেন্সঃ ০৯৬১৭৫১৬২৫৯, হটলাইনঃ ১৬২৫৯</span>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                   <img src="https://i.postimg.cc/DzxWpnHC/Screenshot-2026-01-15-140416.jpg" style="width: 45px">
+                    <div class="logo-text">
+                    
+                        <h1>ইসলামী ব্যাংক বাংলাদেশ পিএলসি.</h1>
+                        <p>কার্তিকপুর বাজার আউটলেট</p>
+                    </div>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="contact-info">
+                    <a href="#" class="holiday-link" onclick="openHolidayModal(event)">
+                        <i class="fas fa-calendar-alt"></i> ছুটির তালিকা
+                    </a>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ul>
+                    <li><a href="#home"><i class="fas fa-home"></i> হোম</a></li>
+                    <li><a href="#about"><i class="fas fa-info-circle"></i> আমাদের সম্পর্কে</a></li>
+                    <li><a href="#services"><i class="fas fa-concierge-bell"></i> সেবাসমূহ</a></li>
+                    <li><a href="#calculators"><i class="fas fa-calculator"></i> মুনাফা ক্যালকুলেটর</a></li>
+                    <li><a href="#account"><i class="fas fa-folder-open"></i> হিসাব খোলা</a></li>
+                    <li><a href="#contact"><i class="fas fa-map-marker-alt"></i> যোগাযোগ</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Floating Status Widget - Bottom Right (Replaces Back to Top) -->
+    <div class="floating-widget" id="floatingWidget" onclick="scrollToTop()">
+        <div class="widget-header">
+            <div class="widget-title">
+                <i class="fas fa-calendar-check"></i>
+                <h4>ব্যাংক স্ট্যাটাস</h4>
+            </div>
+            <i class="fas fa-arrow-up" style="color: var(--accent-color); font-size: 1rem;"></i>
+        </div>
+        <span id="widget-date" class="widget-date">লোড হচ্ছে...</span>
+        <div class="widget-bank-status">
+            <div class="indicator-item">
+                <span class="status-text">
+                    <i class="fas fa-sun"></i>
+                    আজ:
+                </span>
+                <span class="status-text">
+                    <span id="text-today">...</span>
+                    <span id="dot-today" class="dot"></span>
+                </span>
+            </div>
+            <div class="indicator-item">
+                <span class="status-text">
+                    <i class="fas fa-calendar-day"></i>
+                    আগামীকাল:
+                </span>
+                <span class="status-text">
+                    <span id="text-tomorrow">...</span>
+                    <span id="dot-tomorrow" class="dot"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Holiday Modal -->
+    <div id="holidayModal" class="holiday-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-calendar-alt"></i> ব্যাংকের ছুটির তালিকা ২০২৬</h2>
+                <button class="close-btn" onclick="closeHolidayModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <h3>২০২৬ সালের ছুটির তালিকা</h3>
+                <div style="overflow-x: auto;">
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>ক্রম</th>
+                                <th>পর্বের নাম</th>
+                                <th>তারিখ ও দিন</th>
+                                <th>ছুটির পরিমাণ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>০১</td><td>*শব-ই-বরাত</td><td>০৪ ফেব্রুয়ারি, বুধবার</td><td>১ দিন</td></tr>
+                            <tr><td>০২</td><td>শহীদ দিবস ও আন্তর্জাতিক মাতৃভাষা দিবস</td><td>২১ ফেব্রুয়ারি, শনিবার</td><td>১ দিন</td></tr>
+                            <tr><td>০৩</td><td>*শব-ই-কদর</td><td>১৭ মার্চ, মঙ্গলবার</td><td>১ দিন</td></tr>
+                            <tr><td>০৪</td><td>*ঈদ-উল-ফিতর এবং জুমাতুল বিদা</td><td>১৯ থেকে ২৩ মার্চ (বৃহঃ-সোম)</td><td>৫ দিন</td></tr>
+                            <tr><td>০৫</td><td>স্বাধীনতা ও জাতীয় দিবস</td><td>২৬ মার্চ, বৃহস্পতিবার</td><td>১ দিন</td></tr>
+                            <tr><td>০৬</td><td>চৈত্র সংক্রান্তি (পার্বত্য জেলাসমূহের জন্য)</td><td>১৩ এপ্রিল, সোমবার</td><td>১ দিন</td></tr>
+                            <tr><td>০৭</td><td>নববর্ষ</td><td>১৪ এপ্রিল, মঙ্গলবার</td><td>১ দিন</td></tr>
+                            <tr><td>০৮</td><td>মে দিবস এবং *বুদ্ধ পূর্ণিমা</td><td>০১ মে, শুক্রবার</td><td>১ দিন</td></tr>
+                            <tr><td>০৯</td><td>*ঈদ-উল-আযহা</td><td>২৬ থেকে ৩১ মে (মঙ্গল-রবি)</td><td>৬ দিন</td></tr>
+                            <tr><td>১০</td><td>*আশুরা</td><td>২৬ জুন, শুক্রবার</td><td>১ দিন</td></tr>
+                            <tr><td>১১</td><td>ব্যাংক হলিডে</td><td>০১ জুলাই, বুধবার</td><td>১ দিন</td></tr>
+                            <tr><td>১২</td><td>জুলাই গণঅভ্যুত্থান দিবস</td><td>০৫ আগস্ট, বুধবার</td><td>১ দিন</td></tr>
+                            <tr><td>১৩</td><td>*ঈদ-ই-মিলাদুন্নবী (সা.)</td><td>২৬ আগস্ট, বুধবার</td><td>১ দিন</td></tr>
+                            <tr><td>১৪</td><td>জন্মাষ্টমী</td><td>০৪ সেপ্টেম্বর, শুক্রবার</td><td>১ দিন</td></tr>
+                            <tr><td>১৫</td><td>দুর্গাপূজা (নবমী ও বিজয়া দশমী)</td><td>২০ ও ২১ অক্টোবর (মঙ্গল-বুধ)</td><td>২ দিন</td></tr>
+                            <tr><td>১৬</td><td>বিজয় দিবস</td><td>১৬ ডিসেম্বর, বুধবার</td><td>১ দিন</td></tr>
+                            <tr><td>১৭</td><td>যিশু খ্রিস্টের জন্মদিন (বড় দিন)</td><td>২৫ ডিসেম্বর, শুক্রবার</td><td>১ দিন</td></tr>
+                            <tr><td>১৮</td><td>ব্যাংক হলিডে</td><td>৩১ ডিসেম্বর, বৃহস্পতিবার</td><td>১ দিন</td></tr>
+                            <tr><td colspan="3" style="text-align:right;"><strong>মোট ছুটি</strong></td><td><strong>২৮ দিন</strong></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="note" style="color: red; font-size: 0.9rem;">*চাঁদ দেখার উপর নির্ভরশীল।</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="download-btn">
+                    <i class="fas fa-download"></i> ডাউনলোড করুন
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <!-- Typing Animation Target -->
+                <h2 id="hero-title"></h2>
+                
+                
+                <p>আপনার হাতের নাগালে আধুনিক ইসলামী ব্যাংকিং সেবা।</p>
+                <div class="cta-buttons">
+                    <a href="#services" class="cta-button">
+                        <i class="fas fa-list"></i> আমাদের সেবাসমূহ
+                    </a>
+                    <a href="#calculators" class="cta-button cta-button-secondary">
+                        <i class="fas fa-calculator"></i> মুনাফা দেখুন
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h3>আমাদের সম্পর্কে</h3>
+                <p>ইসলামী শরীয়াহ মোতাবেক পরিচালিত দেশের অন্যতম বৃহৎ ব্যাংক</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <h3>ইসলামী ব্যাংক বাংলাদেশ পিএলসি.</h3>
+                    <p>ইসলামী ব্যাংক বাংলাদেশ পিএলসি. দেশের প্রথম ইসলামী শরীয়াহভিত্তিক ব্যাংক হিসেবে ১৯৮৩ সালে যাত্রা শুরু করে। বর্তমানে ব্যাংকটি দেশব্যাপী শতাধিক শাখা এবং অসংখ্য এজেন্ট ব্যাংকিং আউটলেটের মাধ্যমে সেবা প্রদান করছে।</p>
+                    <p>কার্তিকপুর বাজার আউটলেটটি ভেদরগঞ্জ, শরীয়তপুর অঞ্চলের মানুষের জন্য আধুনিক ব্যাংকিং সেবা নিশ্চিত করতে প্রতিষ্ঠিত হয়েছে।</p>
+                </div>
+                <div class="about-image fade-in">
+                    <img src="https://i.postimg.cc/mZ91bNC7/islami-bank-agent-banking-seeklogo.png" alt="ইসলামী ব্যাংক কার্তিকপুর আউটলেট">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h3>আমাদের সেবাসমূহ</h3>
+                <p>কার্তিকপুর বাজার আউটলেট থেকে আপনি যে সকল সেবা গ্রহণ করতে পারবেন:</p>
+            </div>
+            <div class="service-grid">
+                <div class="service-item fade-in">
+                    <div class="service-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                    <h4>নগদ জমা</h4>
+                    <p>আপনার ইসলামী ব্যাংক হিসাবে সহজে টাকা জমা দিন।</p>
+                </div>
+                <div class="service-item fade-in">
+                    <div class="service-icon"><i class="fas fa-money-bill-wave"></i></div>
+                    <h4>নগদ উত্তোলন</h4>
+                    <p>আউটলেট থেকে আপনার প্রয়োজনীয় টাকা তুলুন।</p>
+                </div>
+                <div class="service-item fade-in">
+                    <div class="service-icon"><i class="fas fa-user-plus"></i></div>
+                    <h4>সহজে হিসাব খোলা</h4>
+                    <p>দ্রুত ও ঝামেলামুক্ত উপায়ে নতুন হিসাব খুলুন।</p>
+                </div>
+                <div class="service-item fade-in">
+                    <div class="service-icon"><i class="fas fa-exchange-alt"></i></div>
+                    <h4>তহবিল স্থানান্তর</h4>
+                    <p>এক হিসাব থেকে অন্য হিসাবে টাকা পাঠান।</p>
+                </div>
+                <div class="service-item fade-in">
+                    <div class="service-icon"><i class="fas fa-piggy-bank"></i></div>
+                    <h4>টিডিআর/ডিপিএস বিনিয়োগ</h4>
+                    <p>ভবিষ্যৎ আর্থিক নিরাপত্তার জন্য সেরা বিনিয়োগ প্রকল্প।</p>
+                </div>
+                <div class="service-item fade-in">
+                    <div class="service-icon"><i class="fas fa-globe"></i></div>
+                    <h4>বৈদেশিক রেমিটেন্স</h4>
+                    <p>বিদেশ থেকে আসা টাকা সহজেই উত্তোলন করুন।</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculators Section -->
+    <section id="calculators">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h3>মুনাফা ক্যালকুলেটর</h3>
+                <p>আপনার বিনিয়োগের সম্ভাব্য মুনাফা হিসাব করুন</p>
+            </div>
+
+            <div class="calc-grid">
+                <!-- DPS Calculator -->
+                <div class="card fade-in">
+                    <h3 style="margin-bottom: 20px; color: var(--primary-color); display:flex; align-items:center; gap:10px;">
+                        <i class="fas fa-piggy-bank"></i> ডিপিএস (DPS) ক্যালকুলেটর
+                    </h3>
+                    <div class="form-group">
+                        <label>মাসিক কিস্তির পরিমাণ (টাকা)</label>
+                        <input type="number" id="dps-amount" placeholder="যেমন: ১০০০">
+                    </div>
+                    <div class="form-group">
+                        <label>মেয়াদ</label>
+                        <select id="dps-term">
+                            <option value="3">৩ বছর (৬.৭৫%)</option>
+                            <option value="5">৫ বছর (৭.২৫%)</option>
+                            <option value="10">১০ বছর (৭.৭৫%)</option>
+                        </select>
+                    </div>
+                    <button class="calc-btn" onclick="calculateDPS()">হিসাব করুন</button>
+                    <div id="dps-result" class="result-box" style="display: none;"></div>
+                </div>
+
+                <!-- TDR Calculator -->
+                <div class="card fade-in">
+                    <h3 style="margin-bottom: 20px; color: var(--primary-color); display:flex; align-items:center; gap:10px;">
+                        <i class="fas fa-money-check-alt"></i> ফিক্সড ডিপোজিট (TDR)
+                    </h3>
+                    <div class="form-group">
+                        <label>মোট জমার পরিমাণ (টাকা)</label>
+                        <input type="number" id="tdr-amount" placeholder="যেমন: ১০০০০০">
+                    </div>
+                    <div class="form-group">
+                        <label>মেয়াদ</label>
+                        <select id="tdr-term">
+                            <option value="3|9.50">৩ মাস (৯.৫০%)</option>
+                            <option value="6|9.80">৬ মাস (৯.৮০%)</option>
+                            <option value="12|10.00">১ বছর (১০.০০%)</option>
+                            <option value="36|10.50">৩ বছর (১০.৫০%)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>উৎসে কর (Tax)</label>
+                        <select id="tdr-tax">
+                            <option value="10">১০% (TIN আছে)</option>
+                            <option value="15">১৫% (TIN নেই)</option>
+                            <option value="0">০% (কর মুক্ত)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label style="display:flex; align-items:center; gap:10px; cursor:pointer;">
+                            <input type="checkbox" id="tdr-duty" checked style="width:auto;">
+                            আবগারি শুল্ক বাদ দিন (আনুমানিক)
+                        </label>
+                    </div>
+                    <button class="calc-btn" onclick="calculateTDR()">হিসাব করুন</button>
+                    <div id="tdr-result" class="result-box" style="display: none;"></div>
+                </div>
+            </div>
+
+            <!-- Rate Chart -->
+            <div class="fade-in" style="margin-top: 40px;">
+                <h4 style="color:var(--text-light); text-align:center; margin-bottom:15px;">জনপ্রিয় সেভিংস রেটসমূহ (প্রভিশনাল, ২০২৬ অনুযায়ী)</h4>
+                <div style="overflow-x:auto;">
+                    <table class="rate-table">
+                        <thead>
+                            <tr>
+                                <th>স্কিম / মেয়াদ</th>
+                                <th>মুনাফার হার</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td colspan="2" style="background:#f1f1f1; font-weight:bold; color:var(--primary-color);">ডিপিএস / এমএসএস</td></tr>
+                            <tr><td>১০ বছর</td><td>৭.৭৫%</td></tr>
+                            <tr><td>৫ বছর</td><td>৭.২৫%</td></tr>
+                            <tr><td>৩ বছর</td><td>৬.৭৫%</td></tr>
+                            <tr><td colspan="2" style="background:#f1f1f1; font-weight:bold; color:var(--primary-color);">মেয়াদি আমানত (TDR)</td></tr>
+                            <tr><td>১ মাস</td><td>৫.২৫%</td></tr>
+                            <tr><td>৩ মাস</td><td>৯.৫০%</td></tr>
+                            <tr><td>৬ মাস</td><td>৯.৮০%</td></tr>
+                            <tr><td>১ বছর</td><td>১০.০০%</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Account Opening Section -->
+    <section class="account-opening" id="account">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h3>হিসাব খোলার প্রয়োজনীয় কাগজপত্র</h3>
+                <p>সহজে ও দ্রুত আপনার হিসাব খুলুন</p>
+            </div>
+
+            <div class="tabs-container fade-in">
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="openTab('individual')"><i class="fas fa-user"></i> ব্যক্তিগত হিসাব</button>
+                    <button class="tab-btn" onclick="openTab('org')"><i class="fas fa-building"></i> প্রাতিষ্ঠানিক হিসাব</button>
+                </div>
+
+                <!-- Individual Account Content -->
+                <div id="individual" class="tab-content active">
+                    <ul class="doc-list">
+                        <li>আবেদনকারীর ২ কপি পাসপোর্ট সাইজের ছবি।</li>
+                        <li>আবেদনকারীর জাতীয় পরিচয়পত্র / পাসপোর্ট / জন্ম নিবন্ধনের কপি।</li>
+                        <li>নমিনির ১ কপি ছবি ও জাতীয় পরিচয়পত্রের কপি।</li>
+                        <li>বর্তমান ঠিকানার প্রমাণপত্র (বিদ্যুৎ/গ্যাস বিলের কপি)।</li>
+                        <li>TIN সার্টিফিকেট (যদি থাকে)।</li>
+                    </ul>
+                </div>
+
+                <!-- Organizational Account Content -->
+                <div id="org" class="tab-content">
+                    <ul class="doc-list">
+                        <li>হালনাগাদ ট্রেড লাইসেন্স।</li>
+                        <li>স্বত্বাধিকারী/পার্টনারদের ছবি (২ কপি) ও জাতীয় পরিচয়পত্র।</li>
+                        <li>নমিনির ছবি ও পরিচয়পত্র।</li>
+                        <li>টিন (TIN) সার্টিফিকেট।</li>
+                        <li>সিল ও প্যাড।</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h3 style="color: white;">যোগাযোগ করুন</h3>
+                <p style="color: rgba(255,255,255,0.9);">আমরা আপনার সেবায় সর্বদা প্রস্তুত</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-card fade-in">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h4>ঠিকানা</h4>
+                    <div class="contact-info-item"><span>কার্তিকপুর বাজার, ভেদরগঞ্জ, শরীয়তপুর।</span></div>
+                </div>
+                <div class="contact-card fade-in">
+                    <i class="fas fa-phone-alt"></i>
+                    <h4>যোগাযোগ</h4>
+                    <div class="contact-info-item"><span>০১৯১৬১৪৫২৩৩</span></div>
+                    <div class="contact-info-item"><span>ibblkartikpuragent@gmail.com</span></div>
+                </div>
+                <div class="contact-card fade-in">
+                    <i class="fas fa-clock"></i>
+                    <h4>ব্যাংকিং সময়</h4>
+                    <div class="contact-info-item"><span>রবি-বৃহস্পতিবার: সকাল ১০টা - ৪টা</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ইসলামী ব্যাংক বাংলাদেশ পিএলসি.</h3>
+                    <p>কার্তিকপুর বাজার আউটলেট</p>
+                    <p>কার্তিকপুর বাজার, ভেদরগঞ্জ, শরীয়তপুর</p>
+                </div>
+                <div class="footer-section">
+                    <h3>দ্রুত লিংক</h3>
+                    <ul>
+                        <li><a href="#home">হোম</a></li>
+                        <li><a href="#services">সেবাসমূহ</a></li>
+                        <li><a href="#calculators">মুনাফা ক্যালকুলেটর</a></li>
+                        <li><a href="#account">হিসাব খোলা</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© ২০২৬ ইসলামী ব্যাংক বাংলাদেশ পিএলসি. - কার্তিকপুর বাজার আউটলেট। ডিজাইন ও বাস্তবায়নে <a href="https://github.com/RidwanRidu">রিদওয়ান হোসেন</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Preloader Logic
+        window.addEventListener('load', function() {
+            const preloader = document.querySelector('.preloader');
+            const popupBanner = document.getElementById('popupBanner');
+            
+            setTimeout(function() {
+                // Hide Preloader
+                preloader.classList.add('hidden');
+                
+                // Start Typing Animation after preloader
+                startTypingAnimation();
+                
+                // Show Popup Banner a bit after preloader vanishes
+                setTimeout(function() {
+                    popupBanner.classList.add('show');
+                }, 500);
+            }, 800);
+        });
+
+        // Popup Banner Logic
+        function closePopup() {
+            const popupBanner = document.getElementById('popupBanner');
+            popupBanner.classList.remove('show');
+        }
+
+        // Typing Animation Logic (Looping)
+        function startTypingAnimation() {
+            const text = "ইসলামী ব্যাংক বাংলাদেশ পিএলসি. - কার্তিকপুর বাজার আউটলেট";
+            const element = document.getElementById('hero-title');
+            let index = 0;
+            let isDeleting = false;
+            let typeSpeed = 100;
+
+            function typeWriter() {
+                // Determine if we are typing or deleting
+                if (isDeleting) {
+                    // Remove character
+                    element.textContent = text.substring(0, index - 1);
+                    index--;
+                    typeSpeed = 50; // Faster when deleting
+                } else {
+                    // Add character
+                    element.textContent = text.substring(0, index + 1);
+                    index++;
+                    typeSpeed = 100; // Normal typing speed
+                }
+
+                // Check if word is complete
+                if (!isDeleting && index === text.length) {
+                    // Finished typing, pause before deleting
+                    typeSpeed = 2000; // Wait 2 seconds
+                    isDeleting = true;
+                } else if (isDeleting && index === 0) {
+                    // Finished deleting, pause before typing again
+                    typeSpeed = 500; // Wait 0.5 seconds
+                    isDeleting = false;
+                }
+
+                setTimeout(typeWriter, typeSpeed);
+            }
+
+            // Start the loop
+            typeWriter();
+        }
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const header = document.querySelector('header');
+                    const headerHeight = header ? header.offsetHeight : 0;
+                    const targetPosition = target.offsetTop - headerHeight;
+                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Scroll to top function (for floating widget click)
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Scroll Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Holiday Modal Logic
+        function openHolidayModal(event) {
+            event.preventDefault();
+            document.getElementById('holidayModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeHolidayModal() {
+            document.getElementById('holidayModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Mobile Nav Logic
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('nav ul');
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('nav-active');
+                const icon = navToggle.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+        }
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu.classList.contains('nav-active')) {
+                    navMenu.classList.remove('nav-active');
+                    const icon = navToggle.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+
+        // Tab Logic
+        function openTab(tabName) {
+            const tabs = document.querySelectorAll('.tab-content');
+            const btns = document.querySelectorAll('.tab-btn');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            btns.forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // DPS Calculation
+        function calculateDPS() {
+            const amount = parseFloat(document.getElementById('dps-amount').value);
+            const term = parseInt(document.getElementById('dps-term').value);
+            let rate = term === 3 ? 6.75 : term === 5 ? 7.25 : 7.75;
+            if (!amount || amount <= 0) return alert("টাকার পরিমাণ দিন।");
+            const months = term * 12;
+            const totalDep = amount * months;
+            const profit = (amount * (months * (months + 1)) / 24) * (rate / 100);
+            const total = totalDep + profit;
+            const resDiv = document.getElementById('dps-result');
+            resDiv.innerHTML = `<div class="result-row"><span>মোট জমা:</span> <strong>${totalDep.toLocaleString('bn-BD')} টাকা</strong></div>
+            <div class="result-row"><span>মুনাফা (প্রায়):</span> <strong>${profit.toLocaleString('bn-BD', {maximumFractionDigits: 0})} টাকা</strong></div>
+            <div class="total-row result-row"><span>মোট (প্রায়):</span> <strong>${total.toLocaleString('bn-BD', {maximumFractionDigits: 0})} টাকা</strong></div>`;
+            resDiv.style.display = 'block';
+        }
+
+        // TDR Calculation
+        function calculateTDR() {
+            const amount = parseFloat(document.getElementById('tdr-amount').value);
+            const termData = document.getElementById('tdr-term').value.split('|');
+            const months = parseInt(termData[0]), rate = parseFloat(termData[1]);
+            const taxRate = parseInt(document.getElementById('tdr-tax').value);
+            if (!amount || amount <= 0) return alert("টাকার পরিমাণ দিন।");
+            const grossProfit = amount * (rate / 100) * (months / 12);
+            const tax = grossProfit * (taxRate / 100);
+            const netProfit = grossProfit - tax;
+            const resDiv = document.getElementById('tdr-result');
+            resDiv.innerHTML = `<div class="result-row"><span>মুনাফা:</span> <strong>${grossProfit.toLocaleString('bn-BD', {maximumFractionDigits: 2})}</strong></div>
+            <div class="result-row"><span style="color:red">(-) কর (${taxRate}%):</span> <strong>${tax.toLocaleString('bn-BD', {maximumFractionDigits: 2})}</strong></div>
+            <div class="total-row result-row"><span>নিট মুনাফা:</span> <strong>${netProfit.toLocaleString('bn-BD', {maximumFractionDigits: 2})} টাকা</strong></div>`;
+            resDiv.style.display = 'block';
+        }
+
+        /* Bank Status & Date Widget Logic */
+        const holidays2026 = [
+            "2026-02-04", "2026-02-21", "2026-03-17", "2026-03-19", "2026-03-20",
+            "2026-03-21", "2026-03-22", "2026-03-23", "2026-03-26", "2026-04-13",
+            "2026-04-14", "2026-05-01", "2026-05-26", "2026-05-27", "2026-05-28",
+            "2026-05-29", "2026-05-30", "2026-05-31", "2026-06-26", "2026-07-01",
+            "2026-08-05", "2026-08-26", "2026-09-04", "2026-10-20", "2026-10-21",
+            "2026-12-16", "2026-12-25", "2026-12-31"
+        ];
+
+        function checkBankStatus(dateToCheck) {
+            const day = dateToCheck.getDay(); // 0=Sun, 5=Fri, 6=Sat
+            const isoDate = dateToCheck.toISOString().split('T')[0];
+
+            // Weekly holidays: Friday (5) and Saturday (6)
+            if (day === 5 || day === 6) return "বন্ধ";
+            // Check holiday list
+            if (holidays2026.includes(isoDate)) return "বন্ধ";
+
+            return "খোলা";
+        }
+
+        function updateBankWidget() {
+            const today = new Date();
+            const tomorrow = new Date();
+            tomorrow.setDate(today.getDate() + 1);
+
+            // Date display
+            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('widget-date').innerText = today.toLocaleDateString('bn-BD', dateOptions);
+
+            // Today's status
+            const statusToday = checkBankStatus(today);
+            document.getElementById('text-today').innerText = statusToday;
+            document.getElementById('dot-today').className = `dot ${statusToday === 'খোলা' ? 'dot-open' : 'dot-closed'}`;
+
+            // Tomorrow's status
+            const statusTomorrow = checkBankStatus(tomorrow);
+            document.getElementById('text-tomorrow').innerText = statusTomorrow;
+            document.getElementById('dot-tomorrow').className = `dot ${statusTomorrow === 'খোলা' ? 'dot-open' : 'dot-closed'}`;
+        }
+
+        // Run function
+        updateBankWidget();
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            // Close mobile menu if open and window is resized to desktop
+            if (window.innerWidth > 768 && navMenu.classList.contains('nav-active')) {
+                navMenu.classList.remove('nav-active');
+                const icon = navToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('holidayModal');
+            if (event.target === modal) {
+                closeHolidayModal();
+            }
+        });
+    </script>
+</body>
+</html>
