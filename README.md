@@ -44,5 +44,7 @@ cd ibbl-kartikpur
 
 📞 যোগাযোগ
 প্রোজেক্টটি সম্পর্কে কোনো প্রশ্ন থাকলে বা কোনো তথ্য পরিবর্তনের প্রয়োজন হলে যোগাযোগ করুন:
+https://wa.link/ul4vry <img width="300" height="300" alt="wa link_ul4vry" src="https://github.com/user-attachments/assets/0b51bd53-d457-4cf3-a75d-e7b9bbaddb60" />
+<br><a href="mailto:ridwanhossain307@proton.me">E-mail Me 📧</a>
 
 © ২০২৬ | IBBL Kartikpur Agent Banking
