@@ -91,7 +91,7 @@
             align-items: center;
             opacity: 0;
             transition: opacity 0.4s ease;
-            padding: 20px; /* Default padding */
+            padding: 20px;
         }
 
         .popup-banner.show {
@@ -101,13 +101,13 @@
 
         .popup-content {
             position: relative;
-            width: 800px; /* Desktop width */
+            width: 800px;
             max-width: 100%;
             background: transparent;
             animation: zoomIn 0.4s ease;
             text-align: center;
-            max-height: 90vh; /* Prevents exceeding screen height */
-            overflow-y: auto; /* Scroll if image is too tall */
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         @keyframes zoomIn {
@@ -121,8 +121,8 @@
             border-radius: 12px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.5);
             border: 4px solid var(--accent-color);
-            max-height: 85vh; /* Ensure image fits within viewport height */
-            object-fit: contain; /* Ensures image is not cropped */
+            max-height: 85vh;
+            object-fit: contain;
             display: block;
         }
 
@@ -421,7 +421,7 @@
             font-weight: 700;
             line-height: 1.2;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            min-height: 3.6rem; /* Prevent layout shift */
+            min-height: 3.6rem;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -692,28 +692,6 @@
             font-size: 1.2rem;
         }
 
-        /* Rate Table */
-        table.rate-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: var(--white);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            margin-top: 2rem;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .rate-table th, .rate-table td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .rate-table th {
-            background-color: var(--primary-color);
-            color: var(--white);
-        }
-
         /* Tabs */
         .tabs-container {
             background: var(--white);
@@ -844,6 +822,83 @@
 
         .about-image:hover img {
             transform: scale(1.05);
+        }
+
+        /* Remittance Partner Slider Styling */
+        .remittance-slider-section {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .slider-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 25px 0;
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid #eaeaea;
+        }
+
+        .slider-wrapper::before,
+        .slider-wrapper::after {
+            content: "";
+            height: 100%;
+            position: absolute;
+            width: 120px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .slider-wrapper::before {
+            left: 0;
+            top: 0;
+            background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+        }
+
+        .slider-wrapper::after {
+            right: 0;
+            top: 0;
+            background: linear-gradient(to left, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+        }
+
+        .slider-track {
+            display: inline-flex;
+            width: max-content;
+            animation: marqueeSlide 30s linear infinite;
+        }
+
+        .slider-track:hover {
+            animation-play-state: paused;
+        }
+
+        .slide-item {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 28px;
+            margin: 0 15px;
+            background: #fdfdfd;
+            border: 1px solid #ebebeb;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+            user-select: none;
+            cursor: pointer;
+        }
+
+        .slide-item:hover {
+            transform: translateY(-3px) scale(1.03);
+            border-color: var(--primary-color);
+            box-shadow: 0 6px 15px rgba(0, 100, 0, 0.08);
+        }
+
+        @keyframes marqueeSlide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
         /* Contact Section */
@@ -1132,19 +1187,18 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            /* Popup Responsive Adjustments */
             .popup-banner {
                 padding: 10px;
             }
             
             .popup-content {
                 width: 95%;
-                max-height: 90vh; /* Ensure it fits within screen height */
+                max-height: 90vh;
             }
             
             .popup-image {
-                max-height: 80vh; /* Ensure image fits within screen height */
-                object-fit: contain; /* Prevent cropping */
+                max-height: 80vh;
+                object-fit: contain;
             }
 
             .close-popup {
@@ -1155,7 +1209,6 @@
                 font-size: 20px;
             }
 
-            /* ... other existing mobile styles ... */
             .floating-widget {
                 bottom: 15px;
                 right: 15px;
@@ -1377,6 +1430,11 @@
             .modal-body td {
                 padding: 8px 5px;
             }
+
+            .slider-wrapper::before,
+            .slider-wrapper::after {
+                width: 60px;
+            }
         }
 
         @media (min-width: 769px) and (max-width: 991px) {
@@ -1437,7 +1495,7 @@
 
         /* Touch device improvements */
         @media (hover: none) and (pointer: coarse) {
-            .service-item, .contact-card, .card {
+            .service-item, .contact-card, .card, .slide-item {
                 transition: transform 0.2s ease;
             }
             
@@ -1487,6 +1545,13 @@
             .typing-cursor {
                 animation: none;
             }
+
+            .slider-track {
+                animation: none;
+                overflow-x: auto;
+                white-space: nowrap;
+                display: flex;
+            }
         }
 
         /* Print styles */
@@ -1498,7 +1563,8 @@
             .social-links,
             .modal-content,
             .floating-widget,
-            .popup-banner {
+            .popup-banner,
+            .remittance-slider-section {
                 display: none !important;
             }
             
@@ -1583,7 +1649,6 @@
                 <div class="logo">
                    <img src="https://i.postimg.cc/DzxWpnHC/Screenshot-2026-01-15-140416.jpg" style="width: 45px" alt="ইসলামী ব্যাংক লোগো">
                     <div class="logo-text">
-                    
                         <h1>ইসলামী ব্যাংক বাংলাদেশ পিএলসি.</h1>
                         <p>কার্তিকপুর বাজার আউটলেট</p>
                     </div>
@@ -1704,7 +1769,6 @@
             <div class="hero-content">
                 <!-- Typing Animation Target -->
                 <h2 id="hero-title"></h2>
-                
                 
                 <p>আপনার হাতের নাগালে আধুনিক ইসলামী ব্যাংকিং সেবা।</p>
                 <div class="cta-buttons">
@@ -1848,29 +1912,148 @@
                 </div>
             </div>
 
-            <!-- Rate Chart -->
-            <div class="fade-in" style="margin-top: 40px;">
-                <h4 style="color:var(--text-light); text-align:center; margin-bottom:15px;">জনপ্রিয় সেভিংস রেটসমূহ (প্রভিশনাল, ২০২৬ অনুযায়ী)</h4>
-                <div style="overflow-x:auto;">
-                    <table class="rate-table">
-                        <thead>
-                            <tr>
-                                <th>স্কিম / মেয়াদ</th>
-                                <th>মুনাফার হার</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td colspan="2" style="background:#f1f1f1; font-weight:bold; color:var(--primary-color);">ডিপিএস / এমএসএস</td></tr>
-                            <tr><td>১০ বছর</td><td>৭.৭৫%</td></tr>
-                            <tr><td>৫ বছর</td><td>৭.২৫%</td></tr>
-                            <tr><td>৩ বছর</td><td>৬.৭৫%</td></tr>
-                            <tr><td colspan="2" style="background:#f1f1f1; font-weight:bold; color:var(--primary-color);">মেয়াদি আমানত (TDR)</td></tr>
-                            <tr><td>১ মাস</td><td>৫.২৫%</td></tr>
-                            <tr><td>৩ মাস</td><td>৯.৫০%</td></tr>
-                            <tr><td>৬ মাস</td><td>৯.৮০%</td></tr>
-                            <tr><td>১ বছর</td><td>১০.০০%</td></tr>
-                        </tbody>
-                    </table>
+            <!-- Remittance Partners Section (Replaces Old Rate Table) -->
+            <div class="remittance-slider-section fade-in">
+                <h3 style="font-size: 1.8rem; color: var(--primary-color); margin-bottom: 5px; font-weight: 600;">রেমিট্যান্স পার্টনারসমূহ</h3>
+                <p style="color: var(--text-light); margin-bottom: 25px; font-size: 1.05rem;">বিশ্বের যেকোনো প্রান্ত থেকে বিশ্বস্ত উপায়ে আউটলেটে রেমিট্যান্স পাঠানোর পার্টনারসমূহ</p>
+                
+                <div class="slider-wrapper">
+                    <div class="slider-track">
+                        <!-- Slide 1: Western Union -->
+                        <div class="slide-item">
+                            <span style="color: #000; font-family: 'Arial Black', sans-serif; font-weight: 900; background: #FFCC00; padding: 4px 10px; border-radius: 4px; font-size: 0.95rem;">WESTERN UNION</span>
+                        </div>
+                        <!-- Slide 2: MoneyGram -->
+                        <div class="slide-item" style="gap: 8px;">
+                            <span style="color: #E01A22; font-weight: bold; font-family: sans-serif; display: flex; align-items: center; gap: 5px;">
+                                <i class="fas fa-circle-arrow-right" style="color:#E01A22;"></i> MoneyGram
+                            </span>
+                        </div>
+                        <!-- Slide 3: Ria Money Transfer -->
+                        <div class="slide-item" style="gap: 5px;">
+                            <span style="color: #FF5A00; font-weight: 900; font-style: italic; font-size: 1.3rem; font-family: sans-serif;">ria</span>
+                            <span style="color: #555; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; line-height: 1.1; text-align: left;">Money<br>Transfer</span>
+                        </div>
+                        <!-- Slide 4: Transfast -->
+                        <div class="slide-item" style="color: #0054A6; font-weight: bold; gap: 5px; font-family: sans-serif;">
+                            <i class="fas fa-globe" style="color: #00AEEF;"></i>
+                            <span>TRANSFAST</span>
+                        </div>
+                        <!-- Slide 5: Visa -->
+                        <div class="slide-item">
+                            <span style="color: #1A1F71; font-weight: bold; font-style: italic; font-size: 1.4rem; font-family: sans-serif; text-shadow: 1px 1px 0px #F7B600;">VISA</span>
+                        </div>
+                        <!-- Slide 6: NEC Money -->
+                        <div class="slide-item" style="gap: 6px; font-family: sans-serif;">
+                            <span style="background: red; color: white; padding: 2px 6px; border-radius: 3px; font-weight: bold; font-size: 0.85rem;">NEC</span>
+                            <span style="color: #006400; font-weight: bold;">MONEY</span>
+                        </div>
+                        <!-- Slide 7: Placid Express -->
+                        <div class="slide-item" style="font-family: sans-serif;">
+                            <span style="color: #D2143A; font-weight: bold;">PLACID</span><span style="color: #1A3F8B; font-weight: bold;">EXPRESS</span>
+                        </div>
+                        <!-- Slide 8: Al Rajhi / Tahweel -->
+                        <div class="slide-item" style="gap: 6px; color: #005CA9; font-weight: bold;">
+                            <i class="fas fa-building-columns"></i>
+                            <span>Tahweel Al Rajhi</span>
+                        </div>
+                        <!-- Slide 9: CellFin -->
+                        <div class="slide-item" style="gap: 6px;">
+                            <div style="background: linear-gradient(135deg, #008080, #004d4d); color: white; padding: 3px 10px; border-radius: 6px; font-weight: bold; font-size: 0.9rem;">cell<span style="color: #FFD700;">fin</span></div>
+                        </div>
+                        <!-- Slide 10: Taptap Send -->
+                        <div class="slide-item" style="gap: 8px; font-family: sans-serif;">
+                            <div style="background: #00B159; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-paper-plane" style="color: #fff; font-size: 0.7rem;"></i>
+                            </div>
+                            <span style="color: #024325; font-weight: 800;">taptap<span style="color: #00B159;">send</span></span>
+                        </div>
+                        <!-- Slide 11: TeleMoney -->
+                        <div class="slide-item" style="font-family: sans-serif;">
+                            <span style="color: #E21E26; font-weight: 900; letter-spacing: -0.5px;">TeleMoney</span>
+                        </div>
+                        <!-- Slide 12: Small World -->
+                        <div class="slide-item" style="gap: 5px; font-family: sans-serif;">
+                            <span style="color: #2E7D32; font-weight: bold;"><i class="fas fa-earth-americas" style="color: #4CAF50;"></i> small world</span>
+                        </div>
+                        <!-- Slide 13: Enjaz -->
+                        <div class="slide-item" style="gap: 6px; font-family: sans-serif;">
+                            <span style="color: #D3A13B; font-weight: bold;">enjaz</span>
+                            <span style="color: #E21E26; font-weight: bold; border-left: 1px solid #ccc; padding-left: 6px;">انجاز</span>
+                        </div>
+                        <!-- Slide 14: QuickPay -->
+                        <div class="slide-item" style="gap: 5px; font-family: sans-serif;">
+                            <span style="color: #006400; font-weight: bold;">QuickPay</span>
+                        </div>
+                        <!-- Slide 15: Instant Cash -->
+                        <div class="slide-item" style="background: #FFF9E6; border-color: #FFD700; font-family: sans-serif;">
+                            <span style="color: #1B365D; font-weight: bold; font-style: italic;">INSTANT</span><span style="color: #FF6600; font-weight: bold;">CASH</span>
+                        </div>
+                        <!-- Slide 16: Hello Paisa -->
+                        <div class="slide-item" style="font-family: sans-serif;">
+                            <span style="color: #E91E63; font-weight: 800;">hello</span><span style="color: #3F51B5; font-weight: 800;">paisa</span>
+                        </div>
+
+                        <!-- Duplicate Slides for Infinite Seamless Loop Effect -->
+                        <div class="slide-item">
+                            <span style="color: #000; font-family: 'Arial Black', sans-serif; font-weight: 900; background: #FFCC00; padding: 4px 10px; border-radius: 4px; font-size: 0.95rem;">WESTERN UNION</span>
+                        </div>
+                        <div class="slide-item" style="gap: 8px;">
+                            <span style="color: #E01A22; font-weight: bold; font-family: sans-serif; display: flex; align-items: center; gap: 5px;">
+                                <i class="fas fa-circle-arrow-right" style="color:#E01A22;"></i> MoneyGram
+                            </span>
+                        </div>
+                        <div class="slide-item" style="gap: 5px;">
+                            <span style="color: #FF5A00; font-weight: 900; font-style: italic; font-size: 1.3rem; font-family: sans-serif;">ria</span>
+                            <span style="color: #555; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; line-height: 1.1; text-align: left;">Money<br>Transfer</span>
+                        </div>
+                        <div class="slide-item" style="color: #0054A6; font-weight: bold; gap: 5px; font-family: sans-serif;">
+                            <i class="fas fa-globe" style="color: #00AEEF;"></i>
+                            <span>TRANSFAST</span>
+                        </div>
+                        <div class="slide-item">
+                            <span style="color: #1A1F71; font-weight: bold; font-style: italic; font-size: 1.4rem; font-family: sans-serif; text-shadow: 1px 1px 0px #F7B600;">VISA</span>
+                        </div>
+                        <div class="slide-item" style="gap: 6px; font-family: sans-serif;">
+                            <span style="background: red; color: white; padding: 2px 6px; border-radius: 3px; font-weight: bold; font-size: 0.85rem;">NEC</span>
+                            <span style="color: #006400; font-weight: bold;">MONEY</span>
+                        </div>
+                        <div class="slide-item" style="font-family: sans-serif;">
+                            <span style="color: #D2143A; font-weight: bold;">PLACID</span><span style="color: #1A3F8B; font-weight: bold;">EXPRESS</span>
+                        </div>
+                        <div class="slide-item" style="gap: 6px; color: #005CA9; font-weight: bold;">
+                            <i class="fas fa-building-columns"></i>
+                            <span>Tahweel Al Rajhi</span>
+                        </div>
+                        <div class="slide-item" style="gap: 6px;">
+                            <div style="background: linear-gradient(135deg, #008080, #004d4d); color: white; padding: 3px 10px; border-radius: 6px; font-weight: bold; font-size: 0.9rem;">cell<span style="color: #FFD700;">fin</span></div>
+                        </div>
+                        <div class="slide-item" style="gap: 8px; font-family: sans-serif;">
+                            <div style="background: #00B159; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-paper-plane" style="color: #fff; font-size: 0.7rem;"></i>
+                            </div>
+                            <span style="color: #024325; font-weight: 800;">taptap<span style="color: #00B159;">send</span></span>
+                        </div>
+                        <div class="slide-item" style="font-family: sans-serif;">
+                            <span style="color: #E21E26; font-weight: 900; letter-spacing: -0.5px;">TeleMoney</span>
+                        </div>
+                        <div class="slide-item" style="gap: 5px; font-family: sans-serif;">
+                            <span style="color: #2E7D32; font-weight: bold;"><i class="fas fa-earth-americas" style="color: #4CAF50;"></i> small world</span>
+                        </div>
+                        <div class="slide-item" style="gap: 6px; font-family: sans-serif;">
+                            <span style="color: #D3A13B; font-weight: bold;">enjaz</span>
+                            <span style="color: #E21E26; font-weight: bold; border-left: 1px solid #ccc; padding-left: 6px;">انجاز</span>
+                        </div>
+                        <div class="slide-item" style="gap: 5px; font-family: sans-serif;">
+                            <span style="color: #006400; font-weight: bold;">QuickPay</span>
+                        </div>
+                        <div class="slide-item" style="background: #FFF9E6; border-color: #FFD700; font-family: sans-serif;">
+                            <span style="color: #1B365D; font-weight: bold; font-style: italic;">INSTANT</span><span style="color: #FF6600; font-weight: bold;">CASH</span>
+                        </div>
+                        <div class="slide-item" style="font-family: sans-serif;">
+                            <span style="color: #E91E63; font-weight: 800;">hello</span><span style="color: #3F51B5; font-weight: 800;">paisa</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1998,39 +2181,33 @@
         function startTypingAnimation() {
             const text = "ইসলামী ব্যাংক বাংলাদেশ পিএলসি. - কার্তিকপুর বাজার আউটলেট";
             const element = document.getElementById('hero-title');
+            if(!element) return;
             let index = 0;
             let isDeleting = false;
             let typeSpeed = 100;
 
             function typeWriter() {
-                // Determine if we are typing or deleting
                 if (isDeleting) {
-                    // Remove character
                     element.textContent = text.substring(0, index - 1);
                     index--;
-                    typeSpeed = 50; // Faster when deleting
+                    typeSpeed = 50;
                 } else {
-                    // Add character
                     element.textContent = text.substring(0, index + 1);
                     index++;
-                    typeSpeed = 100; // Normal typing speed
+                    typeSpeed = 100;
                 }
 
-                // Check if word is complete
                 if (!isDeleting && index === text.length) {
-                    // Finished typing, pause before deleting
-                    typeSpeed = 2000; // Wait 2 seconds
+                    typeSpeed = 2000;
                     isDeleting = true;
                 } else if (isDeleting && index === 0) {
-                    // Finished deleting, pause before typing again
-                    typeSpeed = 500; // Wait 0.5 seconds
+                    typeSpeed = 500;
                     isDeleting = false;
                 }
 
                 setTimeout(typeWriter, typeSpeed);
             }
 
-            // Start the loop
             typeWriter();
         }
 
@@ -2038,7 +2215,7 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
-                if (href === '#' || !href) return; // Skip if it's just '#' to prevent syntax errors
+                if (href === '#' || !href) return;
                 
                 e.preventDefault();
                 const target = document.querySelector(href);
@@ -2051,7 +2228,7 @@
             });
         });
 
-        // Scroll to top function (for floating widget click)
+        // Scroll to top function
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -2091,7 +2268,7 @@
         // Close mobile menu when clicking a link
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', () => {
-                if (navMenu.classList.contains('nav-active')) {
+                if (navMenu && navMenu.classList.contains('nav-active')) {
                     navMenu.classList.remove('nav-active');
                     const icon = navToggle.querySelector('i');
                     icon.classList.remove('fa-times');
@@ -2115,7 +2292,10 @@
             const amount = parseFloat(document.getElementById('dps-amount').value);
             const term = parseInt(document.getElementById('dps-term').value);
             let rate = term === 3 ? 6.75 : term === 5 ? 7.25 : 7.75;
-            if (!amount || amount <= 0) return alert("টাকার পরিমাণ দিন।");
+            if (!amount || amount <= 0) {
+                alert("টাকার পরিমাণ দিন।");
+                return;
+            }
             const months = term * 12;
             const totalDep = amount * months;
             const profit = (amount * (months * (months + 1)) / 24) * (rate / 100);
@@ -2133,7 +2313,10 @@
             const termData = document.getElementById('tdr-term').value.split('|');
             const months = parseInt(termData[0]), rate = parseFloat(termData[1]);
             const taxRate = parseInt(document.getElementById('tdr-tax').value);
-            if (!amount || amount <= 0) return alert("টাকার পরিমাণ দিন।");
+            if (!amount || amount <= 0) {
+                alert("টাকার পরিমাণ দিন।");
+                return;
+            }
             const grossProfit = amount * (rate / 100) * (months / 12);
             const tax = grossProfit * (taxRate / 100);
             const netProfit = grossProfit - tax;
@@ -2156,12 +2339,10 @@
         ];
 
         function checkBankStatus(dateToCheck) {
-            const day = dateToCheck.getDay(); // 0=Sun, 5=Fri, 6=Sat
+            const day = dateToCheck.getDay();
             const isoDate = dateToCheck.toISOString().split('T')[0];
 
-            // Weekly holidays: Friday (5) and Saturday (6)
             if (day === 5 || day === 6) return "বন্ধ";
-            // Check holiday list
             if (holidays2026.includes(isoDate)) return "বন্ধ";
 
             return "খোলা";
@@ -2172,28 +2353,22 @@
             const tomorrow = new Date();
             tomorrow.setDate(today.getDate() + 1);
 
-            // Date display
             const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             document.getElementById('widget-date').innerText = today.toLocaleDateString('bn-BD', dateOptions);
 
-            // Today's status
             const statusToday = checkBankStatus(today);
             document.getElementById('text-today').innerText = statusToday;
             document.getElementById('dot-today').className = `dot ${statusToday === 'খোলা' ? 'dot-open' : 'dot-closed'}`;
 
-            // Tomorrow's status
             const statusTomorrow = checkBankStatus(tomorrow);
             document.getElementById('text-tomorrow').innerText = statusTomorrow;
             document.getElementById('dot-tomorrow').className = `dot ${statusTomorrow === 'খোলা' ? 'dot-open' : 'dot-closed'}`;
         }
 
-        // Run function
         updateBankWidget();
 
-        // Handle window resize
         window.addEventListener('resize', function() {
-            // Close mobile menu if open and window is resized to desktop
-            if (window.innerWidth > 768 && navMenu.classList.contains('nav-active')) {
+            if (window.innerWidth > 768 && navMenu && navMenu.classList.contains('nav-active')) {
                 navMenu.classList.remove('nav-active');
                 const icon = navToggle.querySelector('i');
                 icon.classList.remove('fa-times');
@@ -2201,7 +2376,6 @@
             }
         });
 
-        // Close modal when clicking outside
         window.addEventListener('click', function(event) {
             const modal = document.getElementById('holidayModal');
             if (event.target === modal) {
