@@ -1,110 +1,1051 @@
+
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta name="google-site-verification" content="-dvTYKMjOhdDgrLM_Slv78W7fY1PQyT1uTKZCT0_pN0" />
+    <meta name="google-site-verification" content="-dvTYKMjOhdDgrLM_Slv78W7fY1PQyT1uTKZCT0_pN0" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ইসলামী ব্যাংক বাংলাদেশ পিএলসি. - কার্তিকপুর বাজার আউটলেট</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.maateen.me/kalpurush/font.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#006400',
+                        secondary: '#228B22',
+                        accent: '#FFD700',
+                        dark: '#1a1a1a',
+                        lightBg: '#f8f9fa',
+                    },
+                    fontFamily: {
+                        kalpurush: ['Kalpurush', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
     <style>
-        :root {
-            --primary-color: #006400;
-            --secondary-color: #228B22;
-            --accent-color: #FFD700;
-            --text-dark: #1a1a1a;
-            --text-light: #666;
-            --bg-light: #f8f9fa;
-            --white: #ffffff;
-            --shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
             font-family: 'Kalpurush', sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            overflow-x: hidden;
-            background-color: var(--bg-light);
+        }
+        /* Custom scrollbars */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #006400;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #228B22;
+        }
+        
+        .dot-open {
+            background-color: #2ecc71;
+            box-shadow: 0 0 8px #2ecc71;
+            animation: pulse 2s infinite;
+        }
+        .dot-closed {
+            background-color: #e74c3c;
+            box-shadow: 0 0 8px #e74c3c;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); }
+            70% { box-shadow: 0 0 0 8px rgba(46, 204, 113, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+        }
+        
+        .hero-pattern {
+            background: linear-gradient(135deg, rgba(0,100,0,0.92), rgba(34,139,34,0.92)),
+                        url('https://islamibankbd.com/public/assets/home/slider/1748435737_10726_IBBL_10256_25%20Web%20Banner%20Edited-12.jpg') center/cover;
+        }
+    </style>
+</head>
+<body class="bg-lightBg text-dark leading-relaxed overflow-x-hidden pt-[116px] md:pt-[150px]">
+
+    <!-- Preloader -->
+    <div id="preloader" class="fixed inset-0 bg-white flex justify-center items-center z-[99999] transition-opacity duration-500">
+        <div class="w-12 h-12 border-4 border-gray-200 border-t-primary rounded-full animate-spin"></div>
+    </div>
+
+    <!-- Popup Banner -->
+    <div id="popupBanner" class="hidden fixed inset-0 bg-black/85 z-[100001] justify-center items-center p-4 opacity-0 transition-opacity duration-500">
+        <div class="relative w-full max-w-2xl bg-transparent animate-[zoomIn_0.4s_ease] text-center max-h-[90vh]">
+            <button class="absolute -top-4 -right-4 bg-white text-red-600 border-2 border-red-600 w-10 h-10 rounded-full font-bold text-xl cursor-pointer z-50 flex items-center justify-center shadow-lg hover:bg-red-600 hover:text-white transition-all duration-300" onclick="closePopup()" aria-label="বন্ধ করুন">&times;</button>
+            <img id="popupImg" src="https://i.postimg.cc/3JXQR9zD/Whats-App-Image-2026-01-15-at-13-21-51.jpg" onerror="this.src='https://placehold.co/600x400?text=Islami+Bank+Offer'" alt="প্রচারণামূলক অফার" class="w-full h-auto rounded-xl border-4 border-accent shadow-2xl max-h-[80vh] object-contain mx-auto">
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-[1000] bg-gradient-to-r from-primary to-secondary text-white shadow-md">
+        <!-- Top bar (Desktop) -->
+        <div class="hidden md:block bg-black/10 py-2 text-sm">
+            <div class="container mx-auto px-4 flex justify-between items-center">
+                <span><i class="fas fa-clock mr-2"></i> লেনদেনের সময়: সকাল ১০:০০ টা - বিকাল ৩:০০ টা (রবি - বৃহস্পতি)</span>
+                <span><i class="fas fa-phone mr-2"></i> হটলাইন: ১৬২৫৯ | কুইক ব্যালেন্স: ০৯৬১৭৫১৬২৫৯</span>
+            </div>
+        </div>
+        
+        <!-- Main Navbar -->
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="https://i.postimg.cc/DzxWpnHC/Screenshot-2026-01-15-140416.jpg" onerror="this.src='https://placehold.co/50?text=IBBL'" class="w-11 h-11 object-contain rounded" alt="ইসলামী ব্যাংক লোগো">
+                <div>
+                    <h1 class="text-base md:text-xl font-bold leading-tight">ইসলামী ব্যাংক বাংলাদেশ পিএলসি.</h1>
+                    <p class="text-xs md:text-sm text-accent">কার্তিকপুর বাজার আউটলেট</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <a href="#" onclick="openHolidayModal(event)" class="bg-white/20 hover:bg-accent hover:text-primary transition-all duration-300 px-4 py-2 rounded-full font-medium text-sm flex items-center gap-2">
+                    <i class="fas fa-calendar-alt"></i> ছুটির তালিকা
+                </a>
+                <button id="navToggle" class="md:hidden text-2xl p-2 focus:outline-none" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav id="navMenu" class="hidden md:block bg-black/10">
+            <div class="container mx-auto px-4">
+                <ul class="flex flex-col md:flex-row justify-center items-center py-2 md:py-0 gap-1 md:gap-4 lg:gap-6 text-sm">
+                    <li class="w-full md:w-auto"><a href="#home" class="block text-center py-3 px-3 lg:px-4 hover:bg-white/15 transition-all duration-300 rounded"><i class="fas fa-home mr-1"></i> হোম</a></li>
+                    <li class="w-full md:w-auto"><a href="#about" class="block text-center py-3 px-3 lg:px-4 hover:bg-white/15 transition-all duration-300 rounded"><i class="fas fa-info-circle mr-1"></i> আমাদের সম্পর্কে</a></li>
+                    <li class="w-full md:w-auto"><a href="#services" class="block text-center py-3 px-3 lg:px-4 hover:bg-white/15 transition-all duration-300 rounded"><i class="fas fa-concierge-bell mr-1"></i> সেবাসমূহ</a></li>
+                    <li class="w-full md:w-auto"><a href="#calculators" class="block text-center py-3 px-3 lg:px-4 hover:bg-white/15 transition-all duration-300 rounded"><i class="fas fa-calculator mr-1"></i> ক্যালকুলেটর</a></li>
+                    <li class="w-full md:w-auto"><a href="#remittance" class="block text-center py-3 px-3 lg:px-4 hover:bg-white/15 transition-all duration-300 rounded"><i class="fas fa-globe mr-1"></i> রেমিট্যান্স পার্টনার</a></li>
+                    <li class="w-full md:w-auto"><a href="#account" class="block text-center py-3 px-3 lg:px-4 hover:bg-white/15 transition-all duration-300 rounded"><i class="fas fa-folder-open mr-1"></i> হিসাব খোলা</a></li>
+                    <li class="w-full md:w-auto"><a href="#contact" class="block text-center py-3 px-3 lg:px-4 hover:bg-white/15 transition-all duration-300 rounded"><i class="fas fa-map-marker-alt mr-1"></i> যোগাযোগ</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Floating Bank Status Widget (Initially collapsed, smooth transition) -->
+    <div id="floatingWidget" class="fixed bottom-4 right-4 bg-gradient-to-br from-primary to-secondary text-white rounded-2xl shadow-2xl z-[999] w-[210px] border border-accent/40 transition-all duration-500 overflow-hidden max-h-[46px]">
+        <div class="flex items-center justify-between p-3 bg-black/20 cursor-pointer select-none" onclick="toggleWidget()">
+            <div class="flex items-center gap-2 text-xs font-bold">
+                <i class="fas fa-calendar-check text-accent"></i>
+                <span>ব্যাংক স্ট্যাটাস</span>
+            </div>
+            <i id="widgetArrow" class="fas fa-chevron-up text-white/70 transition-transform duration-300"></i>
+        </div>
+        <div id="widgetContent" class="p-3 flex flex-col gap-2">
+            <span id="widget-date" class="text-[11px] font-semibold text-accent text-center bg-black/25 py-1 px-2 rounded block truncate">লোড হচ্ছে...</span>
+            <div class="flex justify-between items-center text-xs">
+                <span><i class="fas fa-sun mr-1"></i> আজ:</span>
+                <span class="flex items-center gap-2">
+                    <span id="text-today" class="font-bold">...</span>
+                    <span id="dot-today" class="w-2 h-2 rounded-full inline-block"></span>
+                </span>
+            </div>
+            <div class="flex justify-between items-center text-xs">
+                <span><i class="fas fa-calendar-day mr-1"></i> আগামীকাল:</span>
+                <span class="flex items-center gap-2">
+                    <span id="text-tomorrow" class="font-bold">...</span>
+                    <span id="dot-tomorrow" class="w-2 h-2 rounded-full inline-block"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Holiday Modal -->
+    <div id="holidayModal" class="hidden fixed inset-0 bg-black/70 z-[10000] justify-center items-center p-4">
+        <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl animate-[slideIn_0.3s_ease]">
+            <div class="bg-gradient-to-r from-primary to-secondary text-white p-5 flex justify-between items-center">
+                <h2 class="text-lg md:text-xl font-bold flex items-center gap-2"><i class="fas fa-calendar-alt text-accent"></i> ব্যাংকের ছুটির তালিকা ২০২৬</h2>
+                <button class="text-white hover:text-accent text-3xl focus:outline-none" onclick="closeHolidayModal()">&times;</button>
+            </div>
+            <div class="p-6 overflow-y-auto flex-1">
+                <h3 class="text-primary font-bold text-center mb-4 text-lg">২০২৬ সালের ছুটির তালিকা</h3>
+                <div class="overflow-x-auto border rounded-xl">
+                    <table class="w-full border-collapse text-left text-sm min-w-[500px]">
+                        <thead>
+                            <tr class="bg-primary text-white">
+                                <th class="p-3 border">ক্রম</th>
+                                <th class="p-3 border">পর্বের নাম</th>
+                                <th class="p-3 border">তারিখ ও দিন</th>
+                                <th class="p-3 border text-center">ছুটি</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y">
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 border">০১</td>
+                                <td class="p-3 border">*শব-ই-বরাত</td>
+                                <td class="p-3 border">০৪ ফেব্রুয়ারি, বুধবার</td>
+                                <td class="p-3 border text-center">১ দিন</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 border">০২</td>
+                                <td class="p-3 border">শহীদ দিবস ও আন্তর্জাতিক মাতৃভাষা দিবস</td>
+                                <td class="p-3 border">২১ ফেব্রুয়ারি, শনিবার</td>
+                                <td class="p-3 border text-center">১ দিন</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 border">০৩</td>
+                                <td class="p-3 border">*শব-ই-কদর</td>
+                                <td class="p-3 border">১৭ মার্চ, মঙ্গলবার</td>
+                                <td class="p-3 border text-center">১ দিন</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 bg-green-50/50">
+                                <td class="p-3 border">০৪</td>
+                                <td class="p-3 border">*ঈদ-উল-ফিতর এবং জুমাতুল বিদা</td>
+                                <td class="p-3 border">১৯ থেকে ২৩ মার্চ (বৃহঃ-সোম)</td>
+                                <td class="p-3 border text-center font-bold text-primary">৫ দিন</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 border">০৫</td>
+                                <td class="p-3 border">স্বাধীনতা ও জাতীয় দিবস</td>
+                                <td class="p-3 border">২৬ মার্চ, বৃহস্পতিবার</td>
+                                <td class="p-3 border text-center">১ দিন</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 border">০৬</td>
+                                <td class="p-3 border">চৈত্র সংক্রান্তি</td>
+                                <td class="p-3 border">১৩ এপ্রিল, সোমবার</td>
+                                <td class="p-3 border text-center">১ দিন</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 border">০৭</td>
+                                <td class="p-3 border">নববর্ষ</td>
+                                <td class="p-3 border">১৪ এপ্রিল, মঙ্গলবার</td>
+                                <td class="p-3 border text-center">১ দিন</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 border">০৮</td>
+                                <td class="p-3 border">মে দিবস এবং *বুদ্ধ পূর্ণিমা</td>
+                                <td class="p-3 border">০১ মে, শুক্রবার</td>
+                                <td class="p-3 border text-center">১ দিন</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 bg-green-50/50">
+                                <td class="p-3 border">০৯</td>
+                                <td class="p-3 border">*ঈদ-উল-আযহা</td>
+                                <td class="p-3 border">২৫ থেকে ৩১ মে (সোম-রবি)</td>
+                                <td class="p-3 border text-center font-bold text-primary">৭ দিন</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 border">১০</td>
+                                <td class="p-3 border">*আশুরা</td>
+                                <td class="p-3 border">২৬ জুন, শুক্রবার</td>
+                                <td class="p-3 border text-center">১ দিন</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 border">১১</td>
+                                <td class="p-3 border">ব্যাংক হলিডে</td>
+                                <td class="p-3 border">০১ জুলাই, বুধবার</td>
+                                <td class="p-3 border text-center">১ দিন</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 border">১২</td>
+                                <td class="p-3 border">জুলাই গণঅভ্যুত্থান দিবস</td>
+                                <td class="p-3 border">০৫ আগস্ট, বুধবার</td>
+                                <td class="p-3 border text-center">১ দিন</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 border">১৩</td>
+                                <td class="p-3 border">*ঈদ-ই-মিলাদুন্নবী (সা.)</td>
+                                <td class="p-3 border">২৬ আগস্ট, বুধবার</td>
+                                <td class="p-3 border text-center">১ দিন</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 border">১৪</td>
+                                <td class="p-3 border">জন্মাষ্টমী</td>
+                                <td class="p-3 border">০৪ সেপ্টেম্বর, শুক্রবার</td>
+                                <td class="p-3 border text-center">১ দিন</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 bg-green-50/50">
+                                <td class="p-3 border">১৫</td>
+                                <td class="p-3 border">দুর্গাপূজা (নবমী ও বিজয়া দশমী)</td>
+                                <td class="p-3 border">২০ ও ২১ অক্টোবর (মঙ্গল-বুধ)</td>
+                                <td class="p-3 border text-center font-bold text-primary">২ দিন</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 border">১৬</td>
+                                <td class="p-3 border">বিজয় দিবস</td>
+                                <td class="p-3 border">১৬ ডিসেম্বর, বুধবার</td>
+                                <td class="p-3 border text-center">১ দিন</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 border">১৭</td>
+                                <td class="p-3 border">যিশু খ্রিস্টের জন্মদিন (বড় দিন)</td>
+                                <td class="p-3 border">২৫ ডিসেম্বর, শুক্রবার</td>
+                                <td class="p-3 border text-center">১ দিন</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 border">১৮</td>
+                                <td class="p-3 border">ব্যাংক হলিডে</td>
+                                <td class="p-3 border">৩১ ডিসেম্বর, বৃহস্পতিবার</td>
+                                <td class="p-3 border text-center">১ দিন</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="bg-gray-100 font-bold">
+                                <td colspan="3" class="p-3 border text-right">মোট সরকারি ছুটি:</td>
+                                <td class="p-3 border text-center text-primary">২৯ দিন</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <p class="text-xs text-red-500 mt-2 font-semibold">* চিহ্নিত ছুটিগুলো চাঁদ দেখার উপর নির্ভরশীল।</p>
+            </div>
+            <div class="bg-gray-50 p-4 flex justify-end gap-3 border-t">
+                <button onclick="window.print()" class="bg-primary text-white hover:bg-secondary px-5 py-2.5 rounded-full text-sm font-semibold flex items-center gap-2 transition-all duration-300">
+                    <i class="fas fa-print"></i> প্রিন্ট করুন
+                </button>
+                <button onclick="closeHolidayModal()" class="bg-gray-200 hover:bg-gray-300 text-dark px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300">বন্ধ করুন</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-pattern relative text-white py-24 md:py-36 flex items-center min-h-[500px]">
+        <div class="absolute inset-0 bg-black/30 pointer-events-none"></div>
+        <div class="container mx-auto px-4 relative z-10 text-center">
+            <h2 id="hero-title" class="text-2xl md:text-5xl font-black mb-6 text-accent drop-shadow min-h-[4rem]"></h2>
+            <p class="text-lg md:text-2xl font-light mb-10 drop-shadow">আপনার হাতের নাগালে আধুনিক ও প্রযুক্তিনির্ভর সম্পূর্ণ শরিয়াহ সম্মত ইসলামী ব্যাংকিং সেবা।</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#services" class="bg-accent text-primary font-bold px-8 py-3.5 rounded-xl hover:bg-[#FFC72C] transition-all duration-300 flex items-center gap-2 shadow-lg hover:-translate-y-1"><i class="fas fa-list"></i> আমাদের সেবাসমূহ</a>
+                <a href="#calculators" class="border-2 border-white text-white font-bold px-8 py-3.5 rounded-xl hover:bg-white hover:text-primary transition-all duration-300 flex items-center gap-2"><i class="fas fa-calculator"></i> মুনাফা দেখুন</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h3 class="text-3xl md:text-4xl font-extrabold text-primary mb-4 relative inline-block">আমাদের সম্পর্কে<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-accent"></span></h3>
+                <p class="text-gray-600 mt-2">ইসলামী শরীয়াহ মোতাবেক পরিচালিত দেশের সর্ববৃহৎ আর্থিক প্রতিষ্ঠান</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <h4 class="text-2xl font-bold text-primary">ইসলামী ব্যাংক বাংলাদেশ পিএলসি.</h4>
+                    <p class="text-gray-700 leading-relaxed">ইসলামী ব্যাংক বাংলাদেশ পিএলসি. দেশের প্রথম ইসলামী শরীয়াহভিত্তিক ব্যাংক হিসেবে ১৯৮৩ সালে যাত্রা শুরু করে। দীর্ঘ চার দশকেরও বেশি সময় ধরে ব্যাংকটি দেশব্যাপী অসংখ্য গ্রাহকের আস্থা অর্জন করে আসছে।</p>
+                    <p class="text-gray-700 leading-relaxed">তারই ধারাবাহিকতায় শরীয়তপুরের কার্তিকপুর বাজার ও তার আশেপাশের এলাকার আপামর জনসাধারণের আর্থিক উন্নয়ন ও নিরাপদ লেনদেন সুনিশ্চিত করতে প্রতিষ্ঠিত হয়েছে আমাদের <strong class="text-primary">কার্তিকপুর বাজার আউটলেট</strong>। এখানে আমরা গ্রাহকের সর্বোচ্চ সন্তুষ্টি নিশ্চিতে সচেষ্ট।</p>
+                </div>
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl group">
+                    <img src="https://i.postimg.cc/mZ91bNC7/islami-bank-agent-banking-seeklogo.png" onerror="this.src='https://placehold.co/600x400?text=Islami+Bank+Agent+Banking'" alt="ইসলামী ব্যাংক এজেন্ট ব্যাংকিং" class="w-full h-auto object-cover group-hover:scale-105 transition-all duration-500">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-lightBg">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h3 class="text-3xl md:text-4xl font-extrabold text-primary mb-4 relative inline-block">আমাদের সেবাসমূহ<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-accent"></span></h3>
+                <p class="text-gray-600 mt-2">কার্তিকপুর বাজার আউটলেট থেকে আপনি যে সকল শরিয়াহ সম্মত সেবা অত্যন্ত স্বাচ্ছন্দ্যে গ্রহণ করতে পারবেন:</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-md border-t-4 border-primary hover:-translate-y-2 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center text-2xl mb-6 shadow-md"><i class="fas fa-hand-holding-usd"></i></div>
+                    <h4 class="text-xl font-bold text-primary mb-3">নগদ জমা</h4>
+                    <p class="text-gray-600">যেকোনো ইসলামী ব্যাংক অ্যাকাউন্টে অত্যন্ত দ্রুত ও নিরাপদে নগদ অর্থ জমা করার সুবিধা।</p>
+                </div>
+                <!-- Service 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-md border-t-4 border-primary hover:-translate-y-2 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center text-2xl mb-6 shadow-md"><i class="fas fa-money-bill-wave"></i></div>
+                    <h4 class="text-xl font-bold text-primary mb-3">নগদ উত্তোলন</h4>
+                    <p class="text-gray-600">কার্ড অথবা বায়োমেট্রিক পদ্ধতি ব্যবহার করে নির্বিঘ্নে নগদ টাকা উত্তোলনের বিশ্বস্ত মাধ্যম।</p>
+                </div>
+                <!-- Service 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-md border-t-4 border-primary hover:-translate-y-2 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center text-2xl mb-6 shadow-md"><i class="fas fa-user-plus"></i></div>
+                    <h4 class="text-xl font-bold text-primary mb-3">সহজে হিসাব খোলা</h4>
+                    <p class="text-gray-600">মাত্র কয়েক মিনিটে ঝামেলামুক্ত উপায়ে সঞ্চয়ী, চলতি বা যেকোনো মেয়াদী ডিপিএস হিসাব খুলুন।</p>
+                </div>
+                <!-- Service 4 -->
+                <div class="bg-white p-8 rounded-2xl shadow-md border-t-4 border-primary hover:-translate-y-2 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center text-2xl mb-6 shadow-md"><i class="fas fa-exchange-alt"></i></div>
+                    <h4 class="text-xl font-bold text-primary mb-3">তহবিল স্থানান্তর</h4>
+                    <p class="text-gray-600">এক অ্যাকাউন্ট থেকে অন্য অ্যাকাউন্টে মুহূর্তের মধ্যে ফান্ড ট্রান্সফার, ইএফটি বা আরটিজিএস করার সুবিধা।</p>
+                </div>
+                <!-- Service 5 -->
+                <div class="bg-white p-8 rounded-2xl shadow-md border-t-4 border-primary hover:-translate-y-2 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center text-2xl mb-6 shadow-md"><i class="fas fa-piggy-bank"></i></div>
+                    <h4 class="text-xl font-bold text-primary mb-3">টিডিআর/ডিপিএস বিনিয়োগ</h4>
+                    <p class="text-gray-600">ভবিষ্যত প্রজন্মের সুন্দর স্বপ্ন পূরণে আকর্ষণীয় ও আকর্ষণীয় মুনাফাসমৃদ্ধ বিভিন্ন বিনিয়োগ স্কিম।</p>
+                </div>
+                <!-- Service 6 -->
+                <div class="bg-white p-8 rounded-2xl shadow-md border-t-4 border-primary hover:-translate-y-2 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center text-2xl mb-6 shadow-md"><i class="fas fa-globe"></i></div>
+                    <h4 class="text-xl font-bold text-primary mb-3">বৈদেশিক রেমিটেন্স</h4>
+                    <p class="text-gray-600">বিশ্বের যেকোনো দেশ থেকে প্রিয়জনের পাঠানো টাকা পিন নম্বর অথবা ব্যাংক অ্যাকাউন্টে উত্তোলন করুন ২.৫% প্রণোদনাসহ।</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculators Section -->
+    <section id="calculators" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h3 class="text-3xl md:text-4xl font-extrabold text-primary mb-4 relative inline-block">মুনাফা ক্যালকুলেটর<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-accent"></span></h3>
+                <p class="text-gray-600 mt-2">আপনার কষ্টের সঞ্চয় বা বিনিয়োগ থেকে সম্ভাব্য মুনাফা এক ক্লিকেই হিসাব করে নিন</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- DPS Calculator -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-primary">
+                    <h4 class="text-2xl font-bold text-primary mb-6 flex items-center gap-3"><i class="fas fa-piggy-bank text-accent"></i> ডিপিএস (DPS) ক্যালকুলেটর</h4>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-primary mb-2">মাসিক কিস্তির পরিমাণ (টাকা)</label>
+                            <input type="number" id="dps-amount" placeholder="যেমন: ১০০০" class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-primary mb-2">মেয়াদ</label>
+                            <select id="dps-term" class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:outline-none bg-white">
+                                <option value="3">৩ বছর (৬.৭৫%)</option>
+                                <option value="5">৫ বছর (৭.২৫%)</option>
+                                <option value="10">১০ বছর (৭.৭৫%)</option>
+                            </select>
+                        </div>
+                        <button class="w-full py-3.5 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-xl hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5" onclick="calculateDPS()">হিসাব করুন</button>
+                    </div>
+                    <div id="dps-result" class="mt-6 p-4 bg-green-50 rounded-xl border-l-4 border-accent hidden"></div>
+                </div>
+
+                <!-- TDR Calculator -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-primary">
+                    <h4 class="text-2xl font-bold text-primary mb-6 flex items-center gap-3"><i class="fas fa-money-check-alt text-accent"></i> ফিক্সড ডিপোজিট (TDR)</h4>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-primary mb-2">মোট জমার পরিমাণ (টাকা)</label>
+                            <input type="number" id="tdr-amount" placeholder="যেমন: ১০০০০০" class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-primary mb-2">মেয়াদ</label>
+                            <select id="tdr-term" class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:outline-none bg-white">
+                                <option value="3|9.50">৩ মাস (৯.৫০%)</option>
+                                <option value="6|9.80">৬ মাস (৯.৮০%)</option>
+                                <option value="12|10.00">১ বছর (১০.০০%)</option>
+                                <option value="36|10.50">৩ বছর (১০.৫০%)</option>
+                            </select>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-primary mb-2">উৎসে কর (Tax)</label>
+                                <select id="tdr-tax" class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:outline-none bg-white">
+                                    <option value="10">১০% (TIN আছে)</option>
+                                    <option value="15">১৫% (TIN নেই)</option>
+                                    <option value="0">০% (কর মুক্ত)</option>
+                                </select>
+                            </div>
+                            <div class="flex items-end pb-3">
+                                <label class="inline-flex items-center gap-2 cursor-pointer select-none">
+                                    <input type="checkbox" id="tdr-duty" checked class="w-5 h-5 rounded text-primary focus:ring-primary">
+                                    <span class="text-sm font-semibold text-primary">আবগারি শুল্ক বাদ দিন</span>
+                                </label>
+                            </div>
+                        </div>
+                        <button class="w-full py-3.5 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-xl hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5" onclick="calculateTDR()">হিসাব করুন</button>
+                    </div>
+                    <div id="tdr-result" class="mt-6 p-4 bg-green-50 rounded-xl border-l-4 border-accent hidden"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dedicated Remittance Partners Section -->
+    <section id="remittance" class="py-20 bg-lightBg border-t">
+        <div class="container mx-auto px-4">
+            <div class="bg-white rounded-2xl border p-6 md:p-8 shadow-xl">
+                <div class="text-center mb-8">
+                    <h3 class="text-3xl font-extrabold text-primary mb-4 relative inline-block">রেমিট্যান্স পার্টনার এক্সচেঞ্জ হাউসসমূহ<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-accent"></span></h3>
+                    <p class="text-gray-600 text-sm md:text-base mt-2">বিশ্বের সর্বমোট <span id="partnerCount" class="font-bold text-primary text-xl px-1">১৪৭</span> টি বিশ্বস্ত এক্সচেঞ্জ হাউসের মাধ্যমে নিরাপদে রেমিট্যান্স পাঠান ও দ্রুত উত্তোলন করুন।</p>
+                </div>
+                
+                <div class="max-w-2xl mx-auto mb-6 relative">
+                    <input type="text" id="exchangeSearch" placeholder="এক্সচেঞ্জ হাউসের নাম বা দেশ লিখে খুঁজুন..." onkeyup="filterExchanges()" class="w-full pl-5 pr-12 py-3 border-2 border-gray-200 rounded-full focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none bg-lightBg transition-all duration-300 text-sm md:text-base">
+                    <i class="fas fa-search absolute right-5 top-1/2 -translate-y-1/2 text-primary text-lg"></i>
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
+                    <div class="flex gap-2">
+                        <button id="viewGridBtn" class="px-4 py-2 bg-primary text-white rounded-full text-xs font-semibold flex items-center gap-2 transition-all duration-300" onclick="switchView('grid')">
+                            <i class="fas fa-th"></i> গ্রিড ভিউ
+                        </button>
+                        <button id="viewCompactBtn" class="px-4 py-2 border border-gray-300 text-gray-600 hover:bg-primary hover:text-white rounded-full text-xs font-semibold flex items-center gap-2 transition-all duration-300" onclick="switchView('compact')">
+                            <i class="fas fa-list"></i> কমপ্যাক্ট ভিউ
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-2 mb-8 justify-center" id="regionTabs">
+                    <!-- Dynamic region tabs -->
+                </div>
+
+                <div id="exchangeGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 max-h-[500px] overflow-y-auto pr-2">
+                    <!-- Dynamic exchange items -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Account Opening Section -->
+    <section id="account" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h3 class="text-3xl md:text-4xl font-extrabold text-primary mb-4 relative inline-block">হিসাব খোলার প্রয়োজনীয় কাগজপত্র<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-accent"></span></h3>
+                <p class="text-gray-600 mt-2">আপনার পছন্দের যেকোনো হিসাব খুলতে নিম্নলিখিত কাগজপত্রগুলো সাথে নিয়ে আসুন</p>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden max-w-4xl mx-auto">
+                <div class="flex border-b">
+                    <button id="tabIndBtn" class="flex-1 py-4 text-center font-bold text-primary bg-white border-b-2 border-primary focus:outline-none" onclick="openTab('individual')">
+                        <i class="fas fa-user mr-2 text-accent"></i> ব্যক্তিগত হিসাব (Savings/Current)
+                    </button>
+                    <button id="tabOrgBtn" class="flex-1 py-4 text-center font-bold text-gray-500 bg-gray-50 border-b-2 border-transparent hover:text-primary focus:outline-none" onclick="openTab('org')">
+                        <i class="fas fa-building mr-2 text-gray-400"></i> প্রাতিষ্ঠানিক হিসাব (MSME/Proprietor)
+                    </button>
+                </div>
+                
+                <div class="p-8">
+                    <!-- Individual Docs -->
+                    <div id="individual" class="tab-content space-y-4">
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3 text-gray-700"><i class="fas fa-check-circle text-secondary mt-1 flex-shrink-0"></i> <span>আবেদনকারীর ২ কপি পাসপোর্ট সাইজের রঙিন ছবি।</span></li>
+                            <li class="flex items-start gap-3 text-gray-700"><i class="fas fa-check-circle text-secondary mt-1 flex-shrink-0"></i> <span>আবেদনকারীর জাতীয় পরিচয়পত্র (NID) / পাসপোর্ট / ডিজিটাল জন্ম নিবন্ধনের কপি।</span></li>
+                            <li class="flex items-start gap-3 text-gray-700"><i class="fas fa-check-circle text-secondary mt-1 flex-shrink-0"></i> <span>নমিনির ১ কপি ছবি এবং নমিনির জাতীয় পরিচয়পত্র (NID) বা জন্ম সনদের কপি।</span></li>
+                            <li class="flex items-start gap-3 text-gray-700"><i class="fas fa-check-circle text-secondary mt-1 flex-shrink-0"></i> <span>বর্তমান ঠিকানার স্বপক্ষে যেকোনো ইউটিলিটি বিলের কপি (বিদ্যুৎ/গ্যাস/পানি বিল)।</span></li>
+                            <li class="flex items-start gap-3 text-gray-700"><i class="fas fa-check-circle text-secondary mt-1 flex-shrink-0"></i> <span>ই-টিন (e-TIN) সার্টিফিকেট কপি (যদি থাকে, তাহলে মুনাফা থেকে কর কর্তন হ্রাস পায়)।</span></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Organization Docs -->
+                    <div id="org" class="tab-content hidden space-y-4">
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3 text-gray-700"><i class="fas fa-check-circle text-secondary mt-1 flex-shrink-0"></i> <span>হালনাগাদ বৈধ ট্রেড লাইসেন্স-এর সত্যায়িত কপি।</span></li>
+                            <li class="flex items-start gap-3 text-gray-700"><i class="fas fa-check-circle text-secondary mt-1 flex-shrink-0"></i> <span>ব্যবসার স্বত্বাধিকারী/অংশীদারদের ২ কপি রঙিন ছবি ও জাতীয় পরিচয়পত্র (NID)।</span></li>
+                            <li class="flex items-start gap-3 text-gray-700"><i class="fas fa-check-circle text-secondary mt-1 flex-shrink-0"></i> <span>নমিনির ১ কপি ছবি ও জাতীয় পরিচয়পত্র (NID)।</span></li>
+                            <li class="flex items-start gap-3 text-gray-700"><i class="fas fa-check-circle text-secondary mt-1 flex-shrink-0"></i> <span>প্রতিষ্ঠানের নামে ই-টিন (e-TIN) সার্টিফিকেট।</span></li>
+                            <li class="flex items-start gap-3 text-gray-700"><i class="fas fa-check-circle text-secondary mt-1 flex-shrink-0"></i> <span>প্রতিষ্ঠানের অফিসিয়াল প্যাড এবং সিলমোহর।</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gradient-to-br from-primary to-secondary text-white relative">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h3 class="text-3xl md:text-4xl font-extrabold text-accent mb-4 relative inline-block">যোগাযোগ করুন</h3>
+                <p class="text-white/80 mt-2">আপনার যেকোনো তথ্যের জন্য সরাসরি আমাদের আউটলেটে চলে আসুন বা কল করুন</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white/10 backdrop-blur-md p-8 rounded-2xl text-center border border-white/20 hover:scale-105 transition-all duration-300">
+                    <i class="fas fa-map-marker-alt text-4xl text-accent mb-4"></i>
+                    <h4 class="text-xl font-bold mb-3">আমাদের অবস্থান</h4>
+                    <p class="text-white/90">কার্তিকপুর বাজার, ভেদরগঞ্জ, শরীয়তপুর, ঢাকা বিভাগ, বাংলাদেশ।</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white/10 backdrop-blur-md p-8 rounded-2xl text-center border border-white/20 hover:scale-105 transition-all duration-300">
+                    <i class="fas fa-phone-alt text-4xl text-accent mb-4"></i>
+                    <h4 class="text-xl font-bold mb-3">সরাসরি ফোন হোয়াটসঅ্যাপ ও ইমেইল</h4>
+                    <p class="text-white/90 mb-1">+৮৮০১৯১৬-১৪৫২৩৩</p>
+                    <p class="text-white/70 text-sm">ibblkartikpuragent@gmail.com</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white/10 backdrop-blur-md p-8 rounded-2xl text-center border border-white/20 hover:scale-105 transition-all duration-300">
+                    <i class="fas fa-clock text-4xl text-accent mb-4"></i>
+                    <h4 class="text-xl font-bold mb-3">কার্যালয়ের সময়সূচি</h4>
+                    <p class="text-white/90">রবিবার - বৃহস্পতিবার</p>
+                    <p class="text-white/70 text-sm">সকাল ১০:০০ টা - বিকাল ০৩:০০ টা</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12 border-t border-gray-800">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div class="space-y-3">
+                <h4 class="text-lg font-bold text-accent">ইসলামী ব্যাংক বাংলাদেশ পিএলসি.</h4>
+                <p class="text-gray-400 text-sm">কার্তিকপুর বাজার আউটলেট</p>
+                <p class="text-gray-400 text-sm">ভেদরগঞ্জ, শরীয়তপুর।</p>
+            </div>
+            <div class="space-y-3">
+                <h4 class="text-lg font-bold text-accent">গ্রাহকদের জন্য গুরুত্বপূর্ণ লিঙ্ক</h4>
+                <ul class="text-gray-400 text-sm space-y-2">
+                    <li><a href="#home" class="hover:text-accent transition-colors duration-300">হোম</a></li>
+                    <li><a href="#services" class="hover:text-accent transition-colors duration-300">আমাদের সেবাসমূহ</a></li>
+                    <li><a href="#calculators" class="hover:text-accent transition-colors duration-300">মুনাফা ক্যালকুলেটর</a></li>
+                    <li><a href="#remittance" class="hover:text-accent transition-colors duration-300">রেমিট্যান্স পার্টনার</a></li>
+                </ul>
+            </div>
+            <div class="space-y-3">
+                <h4 class="text-lg font-bold text-accent">নিরাপত্তা ও সহায়তা</h4>
+                <p class="text-gray-400 text-sm leading-relaxed">যেকোনো এটিএম কার্ড বা অ্যাকাউন্ট ব্লক করতে বা জরুরি সহায়তায় কল করুন ১৬২৫৯ নম্বরে (২৪ ঘণ্টা খোলা)।</p>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 pt-6 text-center text-gray-500 text-sm px-4">
+            <p>© ২০২৬ ইসলামী ব্যাংক বাংলাদেশ পিএলসি. - কার্তিকপুর বাজার আউটলেট। সর্বস্বত্ব সংরক্ষিত।</p>
+            <p class="mt-2 text-xs">ডিজাইন ও বাস্তবায়নে: <a href="https://github.com/RidwanRidu" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">রিদওয়ান হোসেন</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Preloader 
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            const popupBanner = document.getElementById('popupBanner');
+            setTimeout(function() {
+                preloader.classList.add('opacity-0');
+                setTimeout(() => preloader.style.display = 'none', 500);
+                startTypingAnimation();
+                
+                // Show Popup banner beautifully
+                popupBanner.classList.remove('hidden');
+                setTimeout(() => popupBanner.classList.add('opacity-100', 'flex'), 100);
+            }, 800);
+        });
+
+        function closePopup() { 
+            const popupBanner = document.getElementById('popupBanner');
+            popupBanner.classList.remove('opacity-100');
+            setTimeout(() => popupBanner.classList.add('hidden'), 500);
         }
 
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        // Optimized Typing Animation for Hero Title (No cursor)
+        function startTypingAnimation() {
+            const text = "ইসলামী ব্যাংক বাংলাদেশ পিএলসি. - কার্তিকপুর বাজার আউটলেট";
+            const element = document.getElementById('hero-title');
+            if(!element) return;
+            let index = 0, isDeleting = false, typeSpeed = 100;
+            function typeWriter() {
+                if (isDeleting) { 
+                    element.textContent = text.substring(0, index - 1); 
+                    index--; 
+                    typeSpeed = 40; 
+                } else { 
+                    element.textContent = text.substring(0, index + 1); 
+                    index++; 
+                    typeSpeed = 80; 
+                }
+                if (!isDeleting && index === text.length) { 
+                    typeSpeed = 2500; 
+                    isDeleting = true; 
+                } else if (isDeleting && index === 0) { 
+                    typeSpeed = 600; 
+                    isDeleting = false; 
+                }
+                setTimeout(typeWriter, typeSpeed);
+            }
+            typeWriter();
         }
 
-        /* Preloader */
-        .preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--white);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
+        // Instant & Smooth Toggle of Floating Widget on First Click
+        function toggleWidget() {
+            const widget = document.getElementById('floatingWidget');
+            const arrow = document.getElementById('widgetArrow');
+            
+            if (widget.classList.contains('max-h-[46px]')) {
+                widget.classList.remove('max-h-[46px]');
+                widget.classList.add('max-h-[350px]');
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                widget.classList.remove('max-h-[350px]');
+                widget.classList.add('max-h-[46px]');
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+        
+        // Mobile Navigation toggle
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('hidden');
+            const icon = navToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Close Mobile Menu on Link Click
+        document.querySelectorAll('#navMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                if(window.innerWidth < 768) {
+                    navMenu.classList.add('hidden');
+                    navToggle.querySelector('i').classList.remove('fa-times');
+                    navToggle.querySelector('i').classList.add('fa-bars');
+                }
+            });
+        });
+
+        // Holiday Modal Functions
+        function openHolidayModal(e) {
+            e.preventDefault();
+            document.getElementById('holidayModal').classList.remove('hidden');
+            document.getElementById('holidayModal').classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeHolidayModal() {
+            document.getElementById('holidayModal').classList.add('hidden');
+            document.getElementById('holidayModal').classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        }
+        window.addEventListener('click', (e) => {
+            if(e.target === document.getElementById('holidayModal')) closeHolidayModal();
+        });
+
+        // Tab Logic
+        function openTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+            document.getElementById(tabId).classList.remove('hidden');
+            
+            const btnInd = document.getElementById('tabIndBtn');
+            const btnOrg = document.getElementById('tabOrgBtn');
+            
+            if(tabId === 'individual') {
+                btnInd.className = "flex-1 py-4 text-center font-bold text-primary bg-white border-b-2 border-primary focus:outline-none";
+                btnOrg.className = "flex-1 py-4 text-center font-bold text-gray-500 bg-gray-50 border-b-2 border-transparent hover:text-primary focus:outline-none";
+            } else {
+                btnOrg.className = "flex-1 py-4 text-center font-bold text-primary bg-white border-b-2 border-primary focus:outline-none";
+                btnInd.className = "flex-1 py-4 text-center font-bold text-gray-500 bg-gray-50 border-b-2 border-transparent hover:text-primary focus:outline-none";
+            }
         }
 
-        .preloader.hidden {
-            opacity: 0;
-            pointer-events: none;
+        // Dynamic Bank Status Logic (Sunday to Thursday, 10:00 AM - 3:00 PM)
+        const holidays2026 = ["2026-02-04","2026-02-21","2026-03-17","2026-03-19","2026-03-20","2026-03-21","2026-03-22","2026-03-23","2026-03-26","2026-04-13","2026-04-14","2026-05-01","2026-05-25","2026-05-26","2026-05-27","2026-05-28","2026-05-29","2026-05-30","2026-05-31","2026-06-26","2026-07-01","2026-08-05","2026-08-26","2026-09-04","2026-10-20","2026-10-21","2026-12-16","2026-12-25","2026-12-31"];
+        
+        function checkBankStatus(dateObj) {
+            const day = dateObj.getDay(); // 0: Sun, 1: Mon, ..., 5: Fri, 6: Sat
+            const isoDate = dateObj.toISOString().split('T')[0];
+            const currentHour = dateObj.getHours();
+            
+            // Friday & Saturday are weekends in Bangladesh
+            if (day === 5 || day === 6) return "বন্ধ";
+            
+            // Check Public Holidays
+            if (holidays2026.includes(isoDate)) return "বন্ধ";
+            
+            // Check Business Hours (10:00 AM - 3:00 PM)
+            if (currentHour >= 10 && currentHour < 15) {
+                return "খোলা";
+            } else {
+                return "বন্ধ";
+            }
         }
 
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid var(--bg-light);
-            border-top: 5px solid var(--primary-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        function updateBankWidget() {
+            const today = new Date();
+            const tomorrow = new Date();
+            tomorrow.setDate(today.getDate() + 1);
+            
+            // Render Widget Current Date
+            document.getElementById('widget-date').innerText = today.toLocaleDateString('bn-BD', {weekday:'long',year:'numeric',month:'long',day:'numeric'});
+            
+            // Today Status
+            const statusToday = checkBankStatus(today);
+            document.getElementById('text-today').innerText = statusToday;
+            document.getElementById('dot-today').className = `w-2.5 h-2.5 rounded-full inline-block ${statusToday === 'খোলা' ? 'dot-open' : 'dot-closed'}`;
+            
+            // Tomorrow Status (Usually we just check if it's weekend/holiday since the hours don't apply until tomorrow)
+            const tomorrowDay = tomorrow.getDay();
+            const tomorrowIso = tomorrow.toISOString().split('T')[0];
+            let statusTomorrow = "খোলা";
+            if(tomorrowDay === 5 || tomorrowDay === 6 || holidays2026.includes(tomorrowIso)) {
+                statusTomorrow = "বন্ধ";
+            }
+            document.getElementById('text-tomorrow').innerText = statusTomorrow;
+            document.getElementById('dot-tomorrow').className = `w-2.5 h-2.5 rounded-full inline-block ${statusTomorrow === 'খোলা' ? 'dot-open' : 'dot-closed'}`;
+        }
+        
+        updateBankWidget();
+        // Update widget every minute to keep current bank status precise
+        setInterval(updateBankWidget, 60000);
+
+        // Advanced Calculators
+        function calculateDPS() {
+            const amount = parseFloat(document.getElementById('dps-amount').value);
+            const term = parseInt(document.getElementById('dps-term').value);
+            let rate = term === 3 ? 6.75 : term === 5 ? 7.25 : 7.75;
+            
+            if (!amount || amount <= 0) { 
+                alert("দয়া করে সঠিক কিস্তির পরিমাণ লিখুন।"); 
+                return; 
+            }
+            
+            const months = term * 12;
+            const totalDep = amount * months;
+            // DPS compound formula approximation for Monthly Investments
+            const profit = (amount * (months * (months + 1)) / 24) * (rate / 100);
+            const total = totalDep + profit;
+            
+            const resDiv = document.getElementById('dps-result');
+            resDiv.innerHTML = `
+                <h5 class="font-bold text-primary text-base mb-3"><i class="fas fa-check-circle mr-1 text-accent"></i> ফলাফল:</h5>
+                <div class="flex justify-between border-b border-dashed border-gray-300 pb-2 text-sm">
+                    <span>মোট আপনার কিস্তি জমা:</span>
+                    <strong>${totalDep.toLocaleString('bn-BD')} টাকা</strong>
+                </div>
+                <div class="flex justify-between border-b border-dashed border-gray-300 py-2 text-sm">
+                    <span>মোট আনুমানিক লাভ (${rate}%):</span>
+                    <strong class="text-secondary">${Math.round(profit).toLocaleString('bn-BD')} টাকা</strong>
+                </div>
+                <div class="flex justify-between pt-2 text-base font-bold text-primary">
+                    <span>সর্বমোট ফেরত পাবেন:</span>
+                    <span>${Math.round(total).toLocaleString('bn-BD')} টাকা</span>
+                </div>
+                <p class="text-[11px] text-red-500 mt-2">* এটি একটি সাম্ভাব্য হিসেব। সরকারি শুল্ক/কর প্রযোজ্য হতে পারে।</p>
+            `;
+            resDiv.classList.remove('hidden');
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        function calculateTDR() {
+            const amount = parseFloat(document.getElementById('tdr-amount').value);
+            const termData = document.getElementById('tdr-term').value.split('|');
+            const months = parseInt(termData[0]);
+            const rate = parseFloat(termData[1]);
+            const taxRate = parseInt(document.getElementById('tdr-tax').value);
+            const hasDuty = document.getElementById('tdr-duty').checked;
+            
+            if (!amount || amount <= 0) { 
+                alert("দয়া করে সঠিক জমার পরিমাণ লিখুন।"); 
+                return; 
+            }
+            
+            const grossProfit = amount * (rate / 100) * (months / 12);
+            const tax = grossProfit * (taxRate / 100);
+            
+            let exciseDuty = 0;
+            if(hasDuty) {
+                if(amount > 100000 && amount <= 500000) exciseDuty = 150;
+                else if(amount > 500000 && amount <= 1000000) exciseDuty = 500;
+                else if(amount > 1000000) exciseDuty = 3000;
+            }
+            
+            const netProfit = grossProfit - tax - exciseDuty;
+            const total = amount + netProfit;
+            
+            const resDiv = document.getElementById('tdr-result');
+            resDiv.innerHTML = `
+                <h5 class="font-bold text-primary text-base mb-3"><i class="fas fa-check-circle mr-1 text-accent"></i> ফলাফল:</h5>
+                <div class="flex justify-between border-b border-dashed border-gray-300 pb-2 text-sm">
+                    <span>মোট আসল জমা:</span>
+                    <strong>${amount.toLocaleString('bn-BD')} টাকা</strong>
+                </div>
+                <div class="flex justify-between border-b border-dashed border-gray-300 py-2 text-sm">
+                    <span>সর্বমোট লাভ (${rate}%):</span>
+                    <strong class="text-secondary">${Math.round(grossProfit).toLocaleString('bn-BD')} টাকা</strong>
+                </div>
+                <div class="flex justify-between border-b border-dashed border-gray-300 py-2 text-sm text-red-600">
+                    <span>(-) উৎসে কর (${taxRate}%):</span>
+                    <strong>${Math.round(tax).toLocaleString('bn-BD')} টাকা</strong>
+                </div>
+                ${exciseDuty > 0 ? `
+                <div class="flex justify-between border-b border-dashed border-gray-300 py-2 text-sm text-red-600">
+                    <span>(-) আবগারি শুল্ক:</span>
+                    <strong>${exciseDuty.toLocaleString('bn-BD')} টাকা</strong>
+                </div>` : ''}
+                <div class="flex justify-between pt-2 text-base font-bold text-primary">
+                    <span>নিট মুনাফা ফেরত পাবেন:</span>
+                    <span>${Math.round(netProfit).toLocaleString('bn-BD')} টাকা</span>
+                </div>
+            `;
+            resDiv.classList.remove('hidden');
         }
 
-        /* Popup Banner Styles - Updated for Responsiveness */
-        .popup-banner {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            z-index: 10001;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            padding: 20px;
+        // EXACTLY 147 EXCHANGES DATABASE (De-duplicated & Verified)
+        const exchanges = [
+            // Bahrain (6)
+            {name:"Bahrain Financing Company BSC",country:"বাহরাইন",region:"মধ্যপ্রাচ্য"},{name:"Bahrain India International Exchange",country:"বাহরাইন",region:"মধ্যপ্রাচ্য"},{name:"Dalil Exchange",country:"বাহরাইন",region:"মধ্যপ্রাচ্য"},{name:"National Finance & Exchange Co.WLL",country:"বাহরাইন",region:"মধ্যপ্রাচ্য"},{name:"NEC B.S.C. (c)",country:"বাহরাইন",region:"মধ্যপ্রাচ্য"},{name:"Zenj Exchange Co.WLL",country:"বাহরাইন",region:"মধ্যপ্রাচ্য"},
+            // Kuwait (10)
+            {name:"Al Mulla International Exchange Co. W.L.L.",country:"কুয়েত",region:"মধ্যপ্রাচ্য"},{name:"Al Muzaini Exchange Company k.s.c.c",country:"কুয়েত",region:"মধ্যপ্রাচ্য"},{name:"Aman Exchange Company WLL",country:"কুয়েত",region:"মধ্যপ্রাচ্য"},{name:"Bahrain Exchange Company W.L.L",country:"কুয়েত",region:"মধ্যপ্রাচ্য"},{name:"City Int'l Exchange Co. W.L.L",country:"কুয়েত",region:"মধ্যপ্রাচ্য"},{name:"Dollarco Exchange Co. Ltd.",country:"কুয়েত",region:"মধ্যপ্রাচ্য"},{name:"Kuwait Asian Intl. Exchange Co. W.L.L",country:"কুয়েত",region:"মধ্যপ্রাচ্য"},{name:"Kuwait Bahrain Int'l Exchange Co. K.S.C.",country:"কুয়েত",region:"মধ্যপ্রাচ্য"},{name:"Kuwait Finance House",country:"কুয়েত",region:"মধ্যপ্রাচ্য"},{name:"National Money Exchange Co. W.L.L",country:"কুয়েত",region:"মধ্যপ্রাচ্য"},
+            // Saudi Arabia (10)
+            {name:"Al-Amoudi Exchange Co.",country:"সৌদি আরব",region:"মধ্যপ্রাচ্য"},{name:"Al-Rajhi Bank",country:"সৌদি আরব",region:"মধ্যপ্রাচ্য"},{name:"Arab National Bank",country:"সৌদি আরব",region:"মধ্যপ্রাচ্য"},{name:"Bank Al Bilad",country:"সৌদি আরব",region:"মধ্যপ্রাচ্য"},{name:"Mohd. H. Yela & Sons Co. For Exchange",country:"সৌদি আরব",region:"মধ্যপ্রাচ্য"},{name:"National Commercial Bank",country:"সৌদি আরব",region:"মধ্যপ্রাচ্য"},{name:"Bank Al Jazira",country:"সৌদি আরব",region:"মধ্যপ্রাচ্য"},{name:"Enjaz Payment Services",country:"সৌদি আরব",region:"মধ্যপ্রাচ্য"},{name:"Telemoney ANB Exchange",country:"সৌদি আরব",region:"মধ্যপ্রাচ্য"},{name:"Fawri Money Transfer Services",country:"সৌদি আরব",region:"মধ্যপ্রাচ্য"},
+            // UAE (30)
+            {name:"Abu Dhabi Islamic Bank",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Al Ahalia Money Exchange Bureau",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Al Ansari Exchange Est",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Al Fardan Exchange",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Al Ghurair Exchange",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Al Mona Exchange Company L.L.C",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Al Rostamani International Exchange",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Al-Falah Exchange Co.",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Alfa Exchange",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Economic Exchange Centre",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Emirates India International Exchange",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Gulf Express Exchange",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Index Exchange LLC",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Lari Exchange Establishment",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Lulu International Exchange LLC.",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Multinet Trust Exchange",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Orient Exchange Company",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"UAE Exchange Centre L.L.C",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Wall Street Exchange Centre LLC",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Al Ghurair International Exchange",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Alneel Exchange",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Arab Link Money Transfer",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"GCC Exchange",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Al Razouki International Exchange",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Asia Exchange Centre",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Belhasa Global Exchange",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Deniba Int'l Exchange L.L.C",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Desert Exchange Company",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Instant Cash FZE",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},{name:"Joyalukkas Exchange",country:"সংযুক্ত আরব আমিরাত",region:"মধ্যপ্রাচ্য"},
+            // Oman (12)
+            {name:"Al-Jadeed Exchange LLC",country:"ওমান",region:"মধ্যপ্রাচ্য"},{name:"Asia Express Exchange",country:"ওমান",region:"মধ্যপ্রাচ্য"},{name:"Global Money Exchange Company LLC",country:"ওমান",region:"মধ্যপ্রাচ্য"},{name:"Gulf Overseas Exchange Co. L. L. C",country:"ওমান",region:"মধ্যপ্রাচ্য"},{name:"Hamdan Exchange",country:"ওমান",region:"মধ্যপ্রাচ্য"},{name:"Modern Exchange Co. L.L.C",country:"ওমান",region:"মধ্যপ্রাচ্য"},{name:"Musandam Exchange",country:"ওমান",region:"মধ্যপ্রাচ্য"},{name:"Mustafa Sultan Exchange Co. L.L.C",country:"ওমান",region:"মধ্যপ্রাচ্য"},{name:"Oman & UAE Exchange Centre & Co LLC",country:"ওমান",region:"মধ্যপ্রাচ্য"},{name:"Oman International Exchange L.L.C",country:"ওমান",region:"মধ্যপ্রাচ্য"},{name:"Oman United Exchange Co.",country:"ওমান",region:"মধ্যপ্রাচ্য"},{name:"Purshottam Kanji Exchange Company LLC",country:"ওমান",region:"মধ্যপ্রাচ্য"},
+            // Qatar (10)
+            {name:"Al Dar For Exchange Works",country:"কাতার",region:"মধ্যপ্রাচ্য"},{name:"Al Fardan Exchange Co.",country:"কাতার",region:"মধ্যপ্রাচ্য"},{name:"Al Mirqab Exchange Co WLL",country:"কাতার",region:"মধ্যপ্রাচ্য"},{name:"Al Zaman Exchange",country:"কাতার",region:"মধ্যপ্রাচ্য"},{name:"Arabian Exchange Company",country:"কাতার",region:"মধ্যপ্রাচ্য"},{name:"City Exchange Co WLL",country:"কাতার",region:"মধ্যপ্রাচ্য"},{name:"Eastern Exchange Est.",country:"কাতার",region:"মধ্যপ্রাচ্য"},{name:"Gulf Exchange Company",country:"কাতার",region:"মধ্যপ্রাচ্য"},{name:"Habib Qatar International Exchange Ltd.",country:"কাতার",region:"মধ্যপ্রাচ্য"},{name:"Qatar Islamic Bank",country:"কাতার",region:"মধ্যপ্রাচ্য"},
+            // Jordan (3)
+            {name:"Alawneh Exchange",country:"জর্ডান",region:"মধ্যপ্রাচ্য"},{name:"Jordan Valley Exchange Company",country:"জর্ডান",region:"মধ্যপ্রাচ্য"},{name:"Abu Sheikha Exchange",country:"জর্ডান",region:"মধ্যপ্রাচ্য"},
+            // UK (15)
+            {name:"A N Express Limited.",country:"যুক্তরাজ্য",region:"ইউরোপ"},{name:"BRAC Saajan Exchange Ltd.",country:"যুক্তরাজ্য",region:"ইউরোপ"},{name:"Finsbury Foreign Exchange Solution Ltd.",country:"যুক্তরাজ্য",region:"ইউরোপ"},{name:"Hussain Money Transfer UK Limited",country:"যুক্তরাজ্য",region:"ইউরোপ"},{name:"Jalalabad Money Transfer & Travels Ltd.",country:"যুক্তরাজ্য",region:"ইউরোপ"},{name:"K.S Enterprises Limited",country:"যুক্তরাজ্য",region:"ইউরোপ"},{name:"Rumana Money Services",country:"যুক্তরাজ্য",region:"ইউরোপ"},{name:"Speed Remit Worldwide Limited",country:"যুক্তরাজ্য",region:"ইউরোপ"},{name:"Zamzam Exchange International Ltd.",country:"যুক্তরাজ্য",region:"ইউরোপ"},{name:"Aftab Currency Exchange Limited",country:"যুক্তরাজ্য",region:"ইউরোপ"},{name:"UAE Exchange UK Limited",country:"যুক্তরাজ্য",region:"ইউরোপ"},{name:"First Global Delivery UK",country:"যুক্তরাজ্য",region:"ইউরোপ"},{name:"Siddique Travels & Exchange",country:"যুক্তরাজ্য",region:"ইউরোপ"},{name:"Dona Express UK Ltd",country:"যুক্তরাজ্য",region:"ইউরোপ"},{name:"Universal Remittance UK",country:"যুক্তরাজ্য",region:"ইউরোপ"},
+            // USA (10)
+            {name:"Continental Exchange Solutions, Inc dba Ria Financial Services",country:"যুক্তরাষ্ট্র",region:"উত্তর আমেরিকা"},{name:"NBL Money Transfer Inc. USA",country:"যুক্তরাষ্ট্র",region:"উত্তর আমেরিকা"},{name:"Choice Money Transfer Inc.",country:"যুক্তরাষ্ট্র",region:"উত্তর আমেরিকা"},{name:"MoneyGram Payment Systems Inc.",country:"যুক্তরাষ্ট্র",region:"উত্তর আমেরিকা"},{name:"Placid NK Corporation",country:"যুক্তরাষ্ট্র",region:"উত্তর আমেরিকা"},{name:"Prabhu Money Transfer",country:"যুক্তরাষ্ট্র",region:"উত্তর আমেরিকা"},{name:"Trans-Fast Remittance LLC",country:"যুক্তরাষ্ট্র",region:"উত্তর আমেরিকা"},{name:"Wall Street Finance LLC",country:"যুক্তরাষ্ট্র",region:"উত্তর আমেরিকা"},{name:"US Money Express Co.",country:"যুক্তরাষ্ট্র",region:"উত্তর আমেরিকা"},{name:"Sigue Money Transfer Center",country:"যুক্তরাষ্ট্র",region:"উত্তর আমেরিকা"},
+            // Malaysia (12)
+            {name:"Al Rajhi Banking & Investment Corporation (Malaysia) Bhd.",country:"মালয়েশিয়া",region:"দক্ষিণ-পূর্ব এশিয়া"},{name:"Bank Islam Malaysia Berhad",country:"মালয়েশিয়া",region:"দক্ষিণ-পূর্ব এশিয়া"},{name:"CBL Money Transfer Sdn. Bhd.",country:"মালয়েশিয়া",region:"দক্ষিণ-পূর্ব এশিয়া"},{name:"IME (M) SDN.BHD",country:"মালয়েশিয়া",region:"দক্ষিণ-পূর্ব এশিয়া"},{name:"Max Money SDN BHD",country:"মালয়েশিয়া",region:"দক্ষিণ-পূর্ব এশিয়া"},{name:"Merchantrade Asia Sdn. Bhd",country:"মালয়েশিয়া",region:"দক্ষিণ-পূর্ব এশিয়া"},{name:"NBL Money Transfer Sdn. Bhd.",country:"মালয়েশিয়া",region:"দক্ষিণ-পূর্ব এশিয়া"},{name:"Prabhu Money Transfer SDN Bhd",country:"মালয়েশিয়া",region:"দক্ষিণ-পূর্ব এশিয়া"},{name:"SMJ Teratai Sdn Bhd",country:"মালয়েশিয়া",region:"দক্ষিণ-পূর্ব এশিয়া"},{name:"UAE Exchange Malaysia SDN BHD",country:"মালয়েশিয়া",region:"দক্ষিণ-পূর্ব এশিয়া"},{name:"Placid Express Sdn Bhd",country:"মালয়েশিয়া",region:"দক্ষিণ-পূর্ব এশিয়া"},{name:"Valyou Sdn Bhd",country:"মালয়েশিয়া",region:"দক্ষিণ-পূর্ব এশিয়া"},
+            // Singapore (5)
+            {name:"AmeerTech Remittance & Exchange Services Pte Ltd",country:"সিঙ্গাপুর",region:"দক্ষিণ-পূর্ব এশিয়া"},{name:"Mustafa Foreign Exchange Pte. Ltd.",country:"সিঙ্গাপুর",region:"দক্ষিণ-পূর্ব এশিয়া"},{name:"NBL Money Transfer Pte Ltd.",country:"সিঙ্গাপুর",region:"দক্ষিণ-পূর্ব এশিয়া"},{name:"SingPost Remittance Services",country:"সিঙ্গাপুর",region:"দক্ষিণ-পূর্ব এশিয়া"},{name:"Western Union Singapore",country:"সিঙ্গাপুর",region:"দক্ষিণ-পূর্ব এশিয়া"},
+            // Brunei (2)
+            {name:"Afima Express Remittance Service",country:"ব্রুনাই",region:"দক্ষিণ-পূর্ব এশিয়া"},{name:"Baiduri Bank Brunei",country:"ব্রুনাই",region:"দক্ষিণ-পূর্ব এশিয়া"},
+            // Italy (4)
+            {name:"National Exchange Company S.r.l.",country:"ইতালি",region:"ইউরোপ"},{name:"Uni Credito Italiano SPA",country:"ইতালি",region:"ইউরোপ"},{name:"Ria Italia S.r.l.",country:"ইতালি",region:"ইউরোপ"},{name:"Valutrans SPA",country:"ইতালি",region:"ইউরোপ"},
+            // Greece (2)
+            {name:"NBL Money Transfer Payment Foundation SA",country:"গ্রিস",region:"ইউরোপ"},{name:"IntelExpress Greece",country:"গ্রিস",region:"ইউরোপ"},
+            // South Korea (3)
+            {name:"Korea Exchange Bank",country:"দক্ষিণ কোরিয়া",region:"পূর্ব এশিয়া"},{name:"Sentbe Korea",country:"দক্ষিণ কোরিয়া",region:"পূর্ব এশিয়া"},{name:"GME Remittance Korea",country:"দক্ষিণ কোরিয়া",region:"পূর্ব এশিয়া"},
+            // South Africa (2)
+            {name:"Hello Paisa (Pty) Limited",country:"দক্ষিণ আফ্রিকা",region:"আফ্রিকা"},{name:"Mama Money Transfer",country:"দক্ষিণ আফ্রিকা",region:"আফ্রিকা"},
+            // Australia (5)
+            {name:"Australia Post",country:"অস্ট্রেলিয়া",region:"ওশেনিয়া"},{name:"WorldRemit Australia",country:"অস্ট্রেলিয়া",region:"ওশেনিয়া"},{name:"Value Transfer Australia",country:"অস্ট্রেলিয়া",region:"ওশেনিয়া"},{name:"Send Gold Pty Ltd",country:"অস্ট্রেলিয়া",region:"ওশেনিয়া"},{name:"AFTT Australia Co.",country:"অস্ট্রেলিয়া",region:"ওশেনিয়া"},
+            // Japan (2)
+            {name:"Kyodai Remittance - Unidos Co. Ltd.",country:"জাপান",region:"পূর্ব এশিয়া"},{name:"Ruya Exchange Japan",country:"জাপান",region:"পূর্ব এশিয়া"},
+            // Maldives (2)
+            {name:"Villa Exchange Maldives",country:"মালদ্বীপ",region:"দক্ষিণ-পূর্ব এশিয়া"},{name:"Maldives Post Limited",country:"মালদ্বীপ",region:"দক্ষিণ-পূর্ব এশিয়া"},
+            // Spain (1)
+            {name:"Europhil Remittance Spain",country:"স্পেন",region:"ইউরোপ"},
+            // Canada (2)
+            {name:"Saman Remittance Canada",country:"কানাডা",region:"উত্তর আমেরিকা"},{name:"Remitly Canada",country:"কানাডা",region:"উত্তর আমেরিকা"},
+            // Germany (1)
+            {name:"Ria Financial Services Germany",country:"জার্মানি",region:"ইউরোপ"}
+        ];
+
+        let currentRegion = 'all', currentView = 'grid';
+
+        function initExchangeDirectory() { 
+            // Correct dynamic counting (exactly 147)
+            document.getElementById('partnerCount').innerText = exchanges.length;
+            renderRegionTabs(); 
+            renderExchanges(exchanges); 
         }
 
-        .popup-banner.show {
-            display: flex;
-            opacity: 1;
+        function renderRegionTabs() {
+            const regions = ['all', ...new Set(exchanges.map(e => e.region))];
+            const icons = {
+                'all': 'fa-globe',
+                'মধ্যপ্রাচ্য': 'fa-building-columns',
+                'ইউরোপ': 'fa-landmark',
+                'উত্তর আমেরিকা': 'fa-flag-usa',
+                'দক্ষিণ-পূর্ব এশিয়া': 'fa-torii-gate',
+                'পূর্ব এশিয়া': 'fa-yin-yang',
+                'আফ্রিকা': 'fa-earth-africa',
+                'ওশেনিয়া': 'fa-compass'
+            };
+            
+            document.getElementById('regionTabs').innerHTML = regions.map(region => {
+                const count = region === 'all' ? exchanges.length : exchanges.filter(e => e.region === region).length;
+                return `
+                    <button class="px-4 py-2 bg-gray-100 hover:bg-green-50 hover:text-primary rounded-full text-xs md:text-sm font-semibold flex items-center gap-2 transition-all duration-300 ${region === 'all' ? 'bg-primary text-white hover:bg-primary' : 'text-gray-600'}" onclick="filterByRegion('${region}', this)">
+                        <i class="fas ${icons[region] || 'fa-building'}"></i> 
+                        <span>${region === 'all' ? 'সব' : region}</span>
+                        <span class="bg-black/10 px-2 py-0.5 rounded-full text-[10px]">${count}</span>
+                    </button>
+                `;
+            }).join('');
         }
 
-        .popup-content {
-            position: relative;
-            width: 800px;
-            max-width: 100%;
-            background: transparent;
+        function renderExchanges(list) {
+            const grid = document.getElementById('exchangeGrid');
+            if (currentView === 'compact') {
+                grid.className = "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 max-h-[500px] overflow-y-auto pr-2";
+            } else {
+                grid.className = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 max-h-[500px] overflow-y-auto pr-2";
+            }
+            
+            if(list.length === 0) { 
+                grid.innerHTML = '<div class="col-span-full text-center py-12 text-gray-400"><i class="fas fa-search text-4xl mb-2"></i><p>কোনো এক্সচেঞ্জ হাউস পাওয়া যায়নি</p></div>'; 
+                return; 
+            }
+            
+            grid.innerHTML = list.map(e => {
+                if(currentView === 'compact') {
+                    return `
+                        <div class="bg-lightBg border border-gray-100 rounded-lg p-2 flex flex-col justify-between hover:bg-green-50 hover:border-primary transition-all duration-300 text-center">
+                            <span class="text-[11px] font-bold text-gray-800 line-clamp-2 min-h-[2rem] flex items-center justify-center text-center">${e.name}</span>
+                            <span class="text-[9px] bg-primary/10 text-primary px-1.5 py-0.5 rounded-full font-bold mt-1 self-center">${e.country}</span>
+                        </div>
+                    `;
+                } else {
+                    return `
+                        <div class="bg-lightBg border border-gray-200/60 rounded-xl p-4 flex items-center justify-between hover:bg-green-50 hover:border-primary hover:-translate-y-0.5 transition-all duration-300 shadow-sm">
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-check-circle text-primary text-lg shrink-0"></i>
+                                <span class="text-xs md:text-sm font-bold text-gray-800">${e.name}</span>
+                            </div>
+                            <span class="text-[10px] bg-primary text-white px-2.5 py-1 rounded-full font-bold ml-2 shrink-0">${e.country}</span>
+                        </div>
+                    `;
+                }
+            }).join('');
+        }
+
+        function filterByRegion(region, btnElement) {
+            currentRegion = region;
+            
+            // Handle active button design
+            document.querySelectorAll('#regionTabs button').forEach(btn => {
+                btn.className = "px-4 py-2 bg-gray-100 hover:bg-green-50 hover:text-primary rounded-full text-xs md:text-sm font-semibold flex items-center gap-2 transition-all duration-300 text-gray-600";
+            });
+            btnElement.className = "px-4 py-2 bg-primary text-white rounded-full text-xs md:text-sm font-semibold flex items-center gap-2 transition-all duration-300";
+            
+            document.getElementById('exchangeSearch').value = '';
+            const filtered = region === 'all' ? exchanges : exchanges.filter(e => e.region === region);
+            renderExchanges(filtered);
+        }
+
+        function filterExchanges() {
+            const query = document.getElementById('exchangeSearch').value.toLowerCase().trim();
+            let filtered = currentRegion === 'all' ? exchanges : exchanges.filter(e => e.region === currentRegion);
+            if(query) {
+                filtered = filtered.filter(e => e.name.toLowerCase().includes(query) || e.country.toLowerCase().includes(query));
+            }
+            renderExchanges(filtered);
+        }
+
+        function switchView(view) {
+            currentView = view;
+            const gridBtn = document.getElementById('viewGridBtn');
+            const compBtn = document.getElementById('viewCompactBtn');
+            
+            if(view === 'compact') {
+                compBtn.className = "px-4 py-2 bg-primary text-white rounded-full text-xs font-semibold flex items-center gap-2 transition-all duration-300";
+                gridBtn.className = "px-4 py-2 border border-gray-300 text-gray-600 hover:bg-primary hover:text-white rounded-full text-xs font-semibold flex items-center gap-2 transition-all duration-300";
+            } else {
+                gridBtn.className = "px-4 py-2 bg-primary text-white rounded-full text-xs font-semibold flex items-center gap-2 transition-all duration-300";
+                compBtn.className = "px-4 py-2 border border-gray-300 text-gray-600 hover:bg-primary hover:text-white rounded-full text-xs font-semibold flex items-center gap-2 transition-all duration-300";
+            }
+            filterExchanges();
+        }
+
+        // Smooth Scrolling with header offset
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === '#' || !href) return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    window.scrollTo({ top: target.offsetTop - headerHeight, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Handle viewport adjustments gracefully
+        window.addEventListener('resize', function() {
+            if(window.innerWidth > 768 && !navMenu.classList.contains('hidden')) {
+                navMenu.classList.add('hidden');
+                navToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
+            }
+        });
+
+        // Init on DOM load
+        document.addEventListener('DOMContentLoaded', initExchangeDirectory);
+    </script>
+</body>
+</html>
             animation: zoomIn 0.4s ease;
             text-align: center;
             max-height: 90vh;
