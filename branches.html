@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ব্রাঞ্চ অনুসন্ধান - ইসলামী ব্যাংক বাংলাদেশ পিএলসি</title>
+    
+    <!-- কালপুরুষ ফন্ট ইমপোর্ট -->
+    <link href="https://fonts.maateen.me/kalpurush/font.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-green: #008148;
+            --dark-green: #006837;
+            --accent-gold: #FFD700;
+            --light-bg: #f0f4f2;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Kalpurush', Arial, sans-serif;
+            background-color: var(--light-bg);
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* --- হেডার সেকশন --- */
+        header {
+            background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 5px solid var(--accent-gold);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: clamp(1.5rem, 5vw, 2.5rem); /* রেসপন্সিভ ফন্ট */
+            font-weight: bold;
+        }
+
+        header p {
+            margin: 10px 0 0;
+            font-size: clamp(0.9rem, 3vw, 1.2rem);
+            opacity: 0.9;
+        }
+
+        /* --- কন্টেইনার --- */
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: -30px auto 40px;
+            padding: 0 15px;
+        }
+
+        /* --- সার্চ কার্ড --- */
+        .search-card {
+            background: var(--white);
+            padding: clamp(15px, 5vw, 35px);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .search-label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: bold;
+            color: var(--dark-green);
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        /* --- ইনপুট বক্স --- */
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 18px 25px;
+            font-size: 18px;
+            border: 2px solid #ced4da;
+            border-radius: 50px;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--primary-green);
+            box-shadow: 0 0 12px rgba(0,129,72,0.2);
+        }
+
+        /* --- স্ট্যাটাস বার --- */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 5px;
+            font-size: 0.95rem;
+            color: #555;
+            border-bottom: 2px solid #eee;
+            margin-bottom: 15px;
+        }
+
+        #stats {
+            font-weight: bold;
+            color: var(--primary-green);
+        }
+
+        /* --- রেজাল্ট লিস্ট --- */
+        #results {
+            max-height: 65vh; /* স্ক্রিন সাইজ অনুযায়ী উচ্চতা */
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .branch-item {
+            background: #fff;
+            padding: 18px;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 6px solid var(--primary-green);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .branch-item:hover {
+            background: #f4faf7;
+            transform: translateY(-2px);
+        }
+
+        .branch-info {
+            flex: 1;
+            padding-right: 15px;
+        }
+
+        .branch-name {
+            font-size: 1.15rem;
+            font-weight: bold;
+            color: #2c3e50;
+            display: block;
+            word-wrap: break-word;
+        }
+
+        .branch-type {
+            font-size: 0.85rem;
+            color: #27ae60;
+            margin-top: 4px;
+            display: block;
+        }
+
+        .branch-code-tag {
+            background: var(--primary-green);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        /* --- নো রেজাল্ট --- */
+        .no-results {
+            text-align: center;
+            padding: 50px 20px;
+            color: #999;
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* --- ফুটার --- */
+        footer {
+            text-align: center;
+            padding: 30px 15px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* --- মোবাইল রেসপন্সিভ মিডিয়া কোয়েরি --- */
+        @media (max-width: 600px) {
+            .container {
+                margin-top: -20px;
+            }
+            
+            .branch-item {
+                flex-direction: row; /* ছোট মোবাইলেও নাম ও কোড পাশাপাশি থাকবে */
+                padding: 15px;
+            }
+
+            .branch-name {
+                font-size: 1rem;
+            }
+
+            .branch-code-tag {
+                font-size: 0.9rem;
+                padding: 4px 10px;
+            }
+
+            header {
+                padding: 30px 15px;
+            }
+        }
+
+        /* কাস্টম স্ক্রলবার */
+        #results::-webkit-scrollbar {
+            width: 6px;
+        }
+        #results::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        #results::-webkit-scrollbar-thumb {
+            background: var(--primary-green);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>ইসলামী ব্যাংক বাংলাদেশ পিএলসি</h1>
+        <p>শাখা ও উপ-শাখা তথ্য অনুসন্ধান</p>
+    </header>
+
+    <div class="container">
+        <div class="search-card">
+            <label class="search-label" for="searchInput">নাম অথবা কোড দিয়ে সার্চ করুন</label>
+            <div class="input-wrapper">
+                <input type="text" id="searchInput" placeholder="Search (e.g. 103 or Agrabad)..." autocomplete="off">
+            </div>
+
+            <div class="status-bar">
+                <span id="stats">লোড হচ্ছে...</span>
+                <span style="font-weight: bold;">কোড</span>
+            </div>
+            
+            <div id="results">
+                <!-- ডাটা এখানে লোড হবে -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; ২০২৬ ইসলামী ব্যাংক বাংলাদেশ পিএলসি। <br> সকল তথ্য ব্যাংক ডাটাবেজ অনুযায়ী সংরক্ষিত | ডিজাইন ও বাস্তবায়নে <a href="github.com/ridwanridu">রিদওয়ান হোসেন</a></p>
+    </footer>
+
+    <script>
+        // আপনার দেওয়া সমস্ত ডাটা এখানে অ্যারে হিসেবে সাজানো হয়েছে
+        const branchData = [
+            {code: "857", name: "Bhadra sub-Br,New Market,Rajshahi"},
+            {code: "476", name: "Islampur Branch,Jamalpur"},
+            {code: "058", name: "Khulna-Barishal Region"},
+            {code: "433", name: "Muladi Branch,Barishal"},
+            {code: "851", name: "Abdullahpur Sub-Br.,Keraniganj,Dhaka"},
+            {code: "642", name: "Abdullahpur Sub-Branch,Uttara"},
+            {code: "643", name: "Adabor Bazar Sub-Branch,Shyamoli"},
+            {code: "871", name: "Adamdighi Sub-Branch,Bogura"},
+            {code: "647", name: "Aftabnagar Sub-Branch,Badda"},
+            {code: "224", name: "Agargaon Branch"},
+            {code: "777", name: "Agent Banking Service,HO"},
+            {code: "103", name: "Agrabad Br., Ctg."},
+            {code: "406", name: "Agrabad Commercial Area Br"},
+            {code: "018", name: "Akhaura SME Center, B.Baria"},
+            {code: "808", name: "Akij City Sub-Branch,Jashore"},
+            {code: "402", name: "Alamdanga Br,Chuadanga"},
+            {code: "618", name: "Alamnagar Sub-Branch,Rangpur"},
+            {code: "001", name: "Alanga Br, Tangail"},
+            {code: "684", name: "Allardarga Sub-Branch,Kushtia"},
+            {code: "166", name: "Amberkhana Br.,Sylhet."},
+            {code: "151", name: "Amin Bazar Br., Dhaka."},
+            {code: "648", name: "Amirabad Sonapur Bazar Sub-Branch,Sonagazi"},
+            {code: "842", name: "Amtoli Sub-Branch."},
+            {code: "124", name: "Anderkilla Br., Ctg."},
+            {code: "829", name: "Anwara Sadar Sub-Branch,Chattogram"},
+            {code: "367", name: "Anwara,Chittagonj"},
+            {code: "352", name: "Araihazar"},
+            {code: "613", name: "Aramnagar Bazar Sub-Branch,Tarakandi"},
+            {code: "670", name: "Asadgonj Sub-Branch,Chaktai"},
+            {code: "470", name: "Ashkar Dighir Par Branch,Chattogram"},
+            {code: "813", name: "Ashkona Sub-Branch,Dhaka"},
+            {code: "176", name: "Ashugonj,B.Baria."},
+            {code: "443", name: "Ashulia Branch,Dhaka"},
+            {code: "847", name: "Ataikula Sub-Branch."},
+            {code: "379", name: "Ati Bazar"},
+            {code: "846", name: "Atrai Sub-Branchh."},
+            {code: "811", name: "Aturar Depo Sub Branch,Chattogram"},
+            {code: "826", name: "Azampur Kachabazar Sub-Br,Daksin Khan"},
+            {code: "801", name: "Azimpur Sub-Branch,Dhaka"},
+            {code: "196", name: "B.Baria Br., B.Baria."},
+            {code: "868", name: "Baburhat Sub-Br,Chandpur"},
+            {code: "833", name: "Badalgachi Sub branch,Naogaon."},
+            {code: "678", name: "Badamtali Sub-Branch.,Agrabad Commercial Area"},
+            {code: "477", name: "Badarganj Branch,Rangpur"},
+            {code: "310", name: "Badda, Dhaka"},
+            {code: "775", name: "Bagahabari Sub-Branch,Shahjadpur"},
+            {code: "709", name: "Baganchra Bazar Sub-Branch.Benapole"},
+            {code: "180", name: "Bagerhat Br.,Bagerhat."},
+            {code: "465", name: "Bagha Branch,Rajshahi"},
+            {code: "348", name: "Bahaddarhat, Chittagong"},
+            {code: "770", name: "Baikali Bazar Sub-Branch,Daulatpur"},
+            {code: "753", name: "Bajitpur Sub-Branch,Katiadi"},
+            {code: "436", name: "Bakalia Branch"},
+            {code: "392", name: "Bakerganj Br.Barishal"},
+            {code: "331", name: "Bakshiganj Branch, Jamalpur"},
+            {code: "632", name: "Baktermunshi Bazar Sub-Branch,Sonagazi"},
+            {code: "870", name: "Balagonj Sub-Br,Sylhet"},
+            {code: "701", name: "Baliadangi Sub-Branch,Thakurgaon"},
+            {code: "755", name: "Baliakandi Sub-Branch,Rajbari"},
+            {code: "739", name: "Baluchora Sub-Branch,Oxyzen Moor"},
+            {code: "391", name: "Banani Br., Dhaka."},
+            {code: "416", name: "Banasree Br.,Dhaka."},
+            {code: "270", name: "Bancharampur Br, B. Baria"},
+            {code: "297", name: "Bandarban Br, Bandarban"},
+            {code: "239", name: "Bandertilla Br,Ctg."},
+            {code: "002", name: "Bandura Br, Nawabgonj"},
+            {code: "319", name: "Baneswar, Rajshahi"},
+            {code: "859", name: "Bangla Bazar Sub-Branch,Bhola."},
+            {code: "715", name: "Bangla Bazar Sub-Branch,Chandraganj"},
+            {code: "430", name: "Bangla Motor Branch"},
+            {code: "742", name: "Banglabazar Sub-Branch,Barishal"},
+            {code: "861", name: "Bango Bazar Sub-Branch,Dhaka"},
+            {code: "346", name: "Bangodda,Comilla"},
+            {code: "179", name: "Bangshal Br., Dhaka."},
+            {code: "261", name: "Bank Road Br, Noakhali"},
+            {code: "329", name: "Banshkhali Branch, Chittagong"},
+            {code: "312", name: "Baragola, Bogra"},
+            {code: "252", name: "Barayarhat Br, Chittagong"},
+            {code: "234", name: "Barguna Branch, Barguna"},
+            {code: "342", name: "Baridhara Br.,Dhaka"},
+            {code: "111", name: "Barisal"},
+            {code: "804", name: "Barishal University Sub-Branch, Barishal"},
+            {code: "434", name: "Baro Bazar Branch"},
+            {code: "693", name: "Baro Bazar Sub-Branch,Jashore"},
+            {code: "862", name: "Baroghoria Sub-Br.Chapai Nawabgonj"},
+            {code: "284", name: "Barolekha Br, Moulvi Bazar"},
+            {code: "421", name: "Barura Branch,Cumilla"},
+            {code: "432", name: "Basabo Br,Dhaka"},
+            {code: "168", name: "Bashurhat Br., Noakhali."},
+            {code: "656", name: "Bauphal Sub-Branch,Patuakhali"},
+            {code: "681", name: "Bazitkhila Bazar Sub-Branch,Sherpur"},
+            {code: "128", name: "Beani Bazar Br., Sylhet."},
+            {code: "278", name: "Belkuchi Br, Sirajganj"},
+            {code: "164", name: "Benapole Br.,Jessore."},
+            {code: "806", name: "Beparipara Sub Br.Chattogram"},
+            {code: "452", name: "Bera Branch,Pabna"},
+            {code: "228", name: "Bhairab Branch, Kishorgong"},
+            {code: "766", name: "Bhajanpur Sub-Branch,Panchagarh"},
+            {code: "398", name: "Bhaluka Br. Mymensingh"},
+            {code: "306", name: "Bhandaria, Pirojpur"},
+            {code: "320", name: "Bhanga, Faridpur"},
+            {code: "863", name: "Bhangura Sub-Branch,Pabna"},
+            {code: "852", name: "Bhatiary Sub-Br,Pahartoli,Chattogram"},
+            {code: "381", name: "Bhawanigonj Br."},
+            {code: "440", name: "Bheramara Branch,Kushtia"},
+            {code: "174", name: "Bhola Br., Bhola."},
+            {code: "471", name: "Bhujpur Branch,Chattogram"},
+            {code: "280", name: "Bhulta Br,(Rupgonj)Narayangonj"},
+            {code: "355", name: "Bhurungamari, Kurigram"},
+            {code: "601", name: "Bijoy Nagar Sub-Branch,VIP ROAD"},
+            {code: "835", name: "Binodpur Bazar Sub-Branch,Munshigonj."},
+            {code: "658", name: "Bipulashar Bazar Sub-Branch,Sonaimuri"},
+            {code: "238", name: "Birampur Br,Dinajpur"},
+            {code: "420", name: "Birganj Branch,Dinajpur"},
+            {code: "142", name: "Biswanath Br., Sylhet."},
+            {code: "371", name: "Boalkhali Br., Ctg"},
+            {code: "417", name: "Boalmari Branch,Faridpur"},
+            {code: "324", name: "Board Bazar, Gazipur"},
+            {code: "112", name: "Bogura"},
+            {code: "705", name: "Boira Bazar Sub-Branch,KDA Avenue"},
+            {code: "653", name: "Bolirhat Sub-Branch,Bahaddarhat"},
+            {code: "635", name: "Bongo Sonahat Land Port Sub-Branch,Bhurungamari"},
+            {code: "474", name: "Bonpara Branch,Natore"},
+            {code: "019", name: "Borhanuddin SME Center, Bhola"},
+            {code: "819", name: "Boro Bazar Sub-Branch,Meherpur"},
+            {code: "816", name: "Boro Bazar Sub-Branch,Pabna"},
+            {code: "017", name: "BoroDarogarhat SME Center, Sitakundo"},
+            {code: "668", name: "Bouria Sub-Branch,Shawndip"},
+            {code: "023", name: "Burichong SME Center, Comilla"},
+            {code: "654", name: "Burimari Sub-Branch,Patgram"},
+            {code: "132", name: "C-N-Gonj Br.,C-N-Gonj."},
+            {code: "193", name: "CDA-Avenue Br.,Ctg."},
+            {code: "702", name: "CEPZ Gate Sub-Branch,Bandartila"},
+            {code: "203", name: "Cantonment Br., Dhaka."},
+            {code: "286", name: "Chachkoir Br,Natore"},
+            {code: "696", name: "Chak Kanchan Sub-Branch,Dinajpur"},
+            {code: "146", name: "Chaktai Br.,Ctg."},
+            {code: "382", name: "Chandanaish Br."},
+            {code: "314", name: "Chandina, Comilla "},
+            {code: "134", name: "Chandpur Br., Chandpur."},
+            {code: "335", name: "Chandraganj, Laxmipur"},
+            {code: "004", name: "Chaprashirhat Br, Noakhali"},
+            {code: "645", name: "Char Lawrance Bazar Sub-Branch,Hazirhat"},
+            {code: "353", name: "Charfashion, Bhola"},
+            {code: "778", name: "Charpara Sub-Branch,Mymenshingh"},
+            {code: "827", name: "Chasara Link Road Sub-Branch,Narayanganj"},
+            {code: "273", name: "Chatkhil Br, Noakhali"},
+            {code: "403", name: "Chatmohar Branch"},
+            {code: "162", name: "Chawk BazarBr., Ctg."},
+            {code: "105", name: "Chawk Mugoltolly Br. (C.M.B), Dhaka."},
+            {code: "814", name: "Chayabithi Sub-Branch,Gazipur"},
+            {code: "285", name: "Chhagalnaiya Br,Feni"},
+            {code: "231", name: "Chhatak Branch, Sunamgonj"},
+            {code: "732", name: "Chiriakhana Road Sub-Branch,Mirpur-1"},
+            {code: "141", name: "Chiringa Br., Cox's Bazar."},
+            {code: "797", name: "Chiringa Sub-Branch,Coxs Bazar"},
+            {code: "672", name: "Chitolmari Sub-Branch,Bagerhat"},
+            {code: "789", name: "Chondipool Sub-Branch,Dakshin Surma"},
+            {code: "006", name: "Chormuguria Br, Madaripur"},
+            {code: "237", name: "Chouddagram Br,Comilla"},
+            {code: "765", name: "Chourhas Sub-Branch,Kushtia"},
+            {code: "454", name: "Chowdhury Hat Branch,Chattogram"},
+            {code: "275", name: "Chowgacha Br, Jessore"},
+            {code: "126", name: "Chowmuhani Br., Noakhali."},
+            {code: "691", name: "Chowmuhuni Sub-Branch,Dewanhat"},
+            {code: "230", name: "Chuadanga Br, Chuadanga"},
+            {code: "683", name: "Chuknagar Bazar Sub-Branch,Dumuria"},
+            {code: "473", name: "Chunarughat Branch, Habigonj"},
+            {code: "435", name: "College Gate Branch,Tongi,Gazipur"},
+            {code: "623", name: "College Gate Sub-Branch,Moulvibazar"},
+            {code: "339", name: "College Road Br., Feni"},
+            {code: "121", name: "Comilla"},
+            {code: "409", name: "Comilla Cantonment Branch"},
+            {code: "247", name: "Companygonj Br, Comilla"},
+            {code: "116", name: "Cox's Bazar Br.,Cox's Bazar."},
+            {code: "341", name: "Cumilla Chawkbazar Br, Cumilla"},
+            {code: "860", name: "Daffodil Smart City Sub-Branch,Dhaka"},
+            {code: "295", name: "Dagonbhuyian Br, Feni"},
+            {code: "003", name: "Dakbangla Br, Jhenaihdah"},
+            {code: "617", name: "Dakhinkhan Sub-Branch,Haji Camp"},
+            {code: "321", name: "Dakshin Surma, Sylhet"},
+            {code: "282", name: "Damodya Br,Shariatpur"},
+            {code: "794", name: "Damurhuda Sub-Branch,Chuadanga"},
+            {code: "730", name: "Darshana Sub-Branch,Jibon Nagar"},
+            {code: "014", name: "Daudkandi SME Br, Comilla"},
+            {code: "761", name: "Daulatpur Bazar Sub-Branch,Daulatpur"},
+            {code: "182", name: "Daulatpur Br., Khulna."},
+            {code: "679", name: "Debidwar Sub-Branch,Companigonj"},
+            {code: "387", name: "Debiganj Br."},
+            {code: "749", name: "Delduar Sub-Branch,Tangail"},
+            {code: "637", name: "Demra Staff Quarter Sub-Branch,Jatrabari"},
+            {code: "288", name: "Dewanhat Br,Chittagong"},
+            {code: "283", name: "Dhaka EPZ, Dhaka"},
+            {code: "768", name: "Dhaka Judge Court Sub-Branch,Sadarghat"},
+            {code: "731", name: "Dhamrai Bazar Sub-Branch,Kalampur"},
+            {code: "727", name: "Dhanmondhi 5 Sub-Branch,New Maket"},
+            {code: "205", name: "Dhanmondi Br., Dhaka."},
+            {code: "333", name: "Dhap Branch, Rangpur"},
+            {code: "375", name: "Dholaikhal"},
+            {code: "475", name: "Dhunot Branch,Bogura"},
+            {code: "854", name: "Digraj Sub-Branch, Bagerhat."},
+            {code: "138", name: "Dinajpur"},
+            {code: "289", name: "Dohar Br,Dhaka"},
+            {code: "444", name: "Dohazari Branch,Chattogram"},
+            {code: "396", name: "Donia Br.,Dhaka."},
+            {code: "662", name: "Doshghoriya Bazar Sub-Branch,Chatkhil"},
+            {code: "719", name: "Dotterhat Sub-Branch,Maijdee Court"},
+            {code: "649", name: "Dudmukha Bazar Sub-Branch,Bashurhat"},
+            {code: "427", name: "Dumuria Branch"},
+            {code: "245", name: "Dupchanchia Br, Bogra"},
+            {code: "774", name: "Durgapur Bazar Sub-Branch,Netrokona"},
+            {code: "839", name: "ECB Chattar Sub-Branch,Dhaka."},
+            {code: "651", name: "East Nasirabad Sub-Branch,O.R.NIZAM ROAD"},
+            {code: "728", name: "Eastern Housing Sub-Branch,Mirpur Women"},
+            {code: "751", name: "Eidgaon Bazar Sub-Branch,Eidgaon"},
+            {code: "227", name: "Eidgaon Br.Cox's bazar"},
+            {code: "215", name: "Elephant Road Br., Dhaka"},
+            {code: "700", name: "Equria Sub-Branch,Shampur"},
+            {code: "734", name: "Faidabad Sub-Branch,Tongi"},
+            {code: "697", name: "Fakirapool Sub-Branch,VIP ROAD"},
+            {code: "401", name: "Fakirhat Br.,Bagerhat."},
+            {code: "255", name: "Faridgonj Br, Chandpur"},
+            {code: "148", name: "Faridpur"},
+            {code: "136", name: "Farmgate Br., Dhaka."},
+            {code: "268", name: "Fatikchori Br, Chittagong"},
+            {code: "802", name: "Fatulla Bazar Sub-Br,Narayanganj"},
+            {code: "363", name: "Fatulla Branch,Narayangonj"},
+            {code: "831", name: "Fenchunganj Sub-Branch,Sylhet"},
+            {code: "122", name: "Feni, Feni."},
+            {code: "109", name: "Foreign Exchange Br."},
+            {code: "461", name: "Fulbari Br., Dinajpur"},
+            {code: "469", name: "Fulbari Gate Branch,Khulna"},
+            {code: "303", name: "Fulbaria Br, Mymensingh "},
+            {code: "458", name: "Fulgazi Br,Feni"},
+            {code: "011", name: "Fultola SME Br, Khulna"},
+            {code: "611", name: "Gabtoli Sub-Branch,Amin Bazar"},
+            {code: "185", name: "Gaibanda Br., Gaibanda."},
+            {code: "786", name: "Gaital Sub-Branch,Kishoreganj"},
+            {code: "841", name: "Galachipa Sub-Branch."},
+            {code: "677", name: "Gallamari Moor Sub-Branch,Khulna"},
+            {code: "337", name: "Gandaria Br., Dhaka"},
+            {code: "481", name: "Gangni Branch,Meherpur"},
+            {code: "772", name: "Gawsul Azam Avenue Sub-Branch,Uttara"},
+            {code: "356", name: "Gazipur Sadar, Gazipur"},
+            {code: "158", name: "GazipurChawrasta Br.,Gazipur."},
+            {code: "482", name: "Ghatali Br.,Tangail."},
+            {code: "640", name: "Ghoraghat Sub-Branch,Gobindagonj"},
+            {code: "220", name: "Goalabazar Br., Sylhet"},
+            {code: "720", name: "Goalchamot Sub-Branch,Faridpur"},
+            {code: "219", name: "Gobindagonj Br., Gaibanda"},
+            {code: "445", name: "Godagari Branch,Rajshahi"},
+            {code: "620", name: "Goderpara Sub-Branch,Barogola"},
+            {code: "365", name: "GolapgonjBr.Sylhet"},
+            {code: "208", name: "Gopalgonj Br., Gopalgonj."},
+            {code: "723", name: "Gorai Sub-Branch,Mirzapur"},
+            {code: "615", name: "Goran Sub-Branch,Khilgaon"},
+            {code: "836", name: "Gouripur Bazar sub-Branch,Mymensingh"},
+            {code: "258", name: "Gouripur, Comilla"},
+            {code: "636", name: "Gournadi Bondor Sub-Branch,Torki"},
+            {code: "784", name: "Green Road Sub-Branch,Elephant Road"},
+            {code: "177", name: "Gulshan Br., Dhaka."},
+            {code: "276", name: "Gulshan Circle-1 Br, Dhaka "},
+            {code: "451", name: "Gunagori Branch, Chattogram"},
+            {code: "837", name: "Guptachara Bazar Sub-Branch"},
+            {code: "796", name: "Haidergonj Sub Branch, Raipur Br,Laxmipur"},
+            {code: "218", name: "Haji Camp Br., Dhaka"},
+            {code: "189", name: "Hajigonj Br.,Chandpur."},
+            {code: "760", name: "Hajir Para Sub-Branch,Chandraganj"},
+            {code: "805", name: "Halda Sub-Branch,Chattogram"},
+            {code: "803", name: "Halishahar Housing Estate Sub-Branch,Chattogram"},
+            {code: "334", name: "Halishahar, Chittagong"},
+            {code: "676", name: "Haluaghat Sub-Branch,Phulpur"},
+            {code: "825", name: "Harinathpur Sub-Branch,Barishal"},
+            {code: "170", name: "Hathazari Br., Ctg."},
+            {code: "665", name: "Hatibandha Sub-Branch,Patgram"},
+            {code: "639", name: "Hatirpool Sub-Branch,Bangla Motor"},
+            {code: "318", name: "Hatkhola, Barisal"},
+            {code: "370", name: "Hazirhat Br., Laxmipur."},
+            {code: "213", name: "Head Office Complex Br."},
+            {code: "100", name: "Head Office-Service Br."},
+            {code: "404", name: "Hemayetpur Br.,Savar"},
+            {code: "173", name: "Highway Br Sherpur,Bogra"},
+            {code: "844", name: "Hili Sub-Branch."},
+            {code: "198", name: "Hobigonj Br., Hobigonj."},
+            {code: "603", name: "Hospital More Sub-Branch,College Road,Feni"},
+            {code: "446", name: "Hossainpur Branch,Kishoreganj"},
+            {code: "229", name: "Ishwardi"},
+            {code: "110", name: "Islampur Br., Dhaka."},
+            {code: "272", name: "Jagannatpur Br, Sunamganj"},
+            {code: "743", name: "Jajira Sub-Branch,Shariatpur"},
+            {code: "655", name: "Jakshin Bazar Sub-Branch,Laxmipur"},
+            {code: "257", name: "Jaldhaka, Nilphamari"},
+            {code: "161", name: "Jamalpur"},
+            {code: "767", name: "Jamalpur Bazar Sub-Branch,Rajbari"},
+            {code: "204", name: "Jatrabari Br., Dhaka."},
+            {code: "125", name: "Jessore Br., Jessore."},
+            {code: "183", name: "Jhalokati Br., Jhalokati."},
+            {code: "762", name: "Jhawdanga Bazar Sub-Branch,Satkhira"},
+            {code: "175", name: "Jhenaidah Br., Jhenaidah."},
+            {code: "160", name: "Jhikorgacha Br.,Jessore."},
+            {code: "323", name: "Jibon Nagar, Chuadanga"},
+            {code: "783", name: "Jigatala Sub-Branch,New Market"},
+            {code: "748", name: "Jomidarhat Sub-Branch,Chowmuhani"},
+            {code: "153", name: "Joypurhat"},
+            {code: "137", name: "Jublee Road Br., Ctg."},
+            {code: "627", name: "Jumur Station Sub-Branch,Laxmipur"},
+            {code: "316", name: "KDA Avenue Br."},
+            {code: "361", name: "Kadamtoli,Chittagong"},
+            {code: "707", name: "Kaderabad Housing Sub-Branch,Mohammadpur Krishi Market"},
+            {code: "015", name: "Kahaloo SME Center, Bogra"},
+            {code: "810", name: "Kakoli Sub-Branch,Dhaka"},
+            {code: "442", name: "Kalai Branch,Joypurhat"},
+            {code: "016", name: "Kalampur SME Center, Savar"},
+            {code: "386", name: "Kalapara Br., Patuakhali."},
+            {code: "849", name: "Kalarmarchara Sub-Branch."},
+            {code: "664", name: "Kalatia Bazar Sub-Branch,Ati Bazar"},
+            {code: "817", name: "Kalia Sub-Branch,Narail"},
+            {code: "462", name: "Kaliakair Branch, Gazipur"},
+            {code: "287", name: "Kaliganj Br,Jhenaidah"},
+            {code: "463", name: "Kaliganj Branch,Dhaka"},
+            {code: "744", name: "Kaligonj Bazar Sub-Branch,Palash"},
+            {code: "186", name: "Kaligonj Br.,Satkhira."},
+            {code: "455", name: "Kalir Bazar Branch,Gaibandha"},
+            {code: "378", name: "Kalkini"},
+            {code: "380", name: "Kalurghat Br."},
+            {code: "680", name: "Kamarer Chor Bazar Sub-Branch,Sherpur"},
+            {code: "773", name: "Kamolpur Sub-Branch,Bhairab"},
+            {code: "364", name: "Kamrangir Char, Dhaka"},
+            {code: "248", name: "Kanaighat Br, Sylhet"},
+            {code: "292", name: "Kanchpur Br,N-Gonj"},
+            {code: "785", name: "Kanchpur Bus Stand Sub-Branch,Kanchpur"},
+            {code: "376", name: "Kapasia"},
+            {code: "726", name: "Kaptan Bazar Sub-Branch,Nawabpur Road"},
+            {code: "713", name: "Karamotia Sub-Branch,Sonagazi"},
+            {code: "799", name: "Karatia Sub-Branch,Tangail"},
+            {code: "449", name: "Karnafuli Branch,Chattogram"},
+            {code: "820", name: "Kashiani Sub-Branch,Gopalganj"},
+            {code: "165", name: "Kashinathpur Br., Pabna."},
+            {code: "343", name: "Katiadi,Kishoreganj"},
+            {code: "222", name: "Kawran Bazar Branch, Dhaka"},
+            {code: "619", name: "Kawtoli Sub-Branch,B.Baria"},
+            {code: "641", name: "Kazipara Sub-Branch,Mirpur"},
+            {code: "294", name: "Keranihat Br, Chittagong"},
+            {code: "388", name: "Keshabpur Branch, Jessore"},
+            {code: "301", name: "Khagrachari Br, Khagrachari"},
+            {code: "716", name: "Khaleast Munshiganj Sadar Sub-Branch,Munshigonj"},
+            {code: "745", name: "Khalishpur Bazar Sub-Branch,Kotchandpur"},
+            {code: "710", name: "Khalishpur Sub-Branch,Daulatpur"},
+            {code: "779", name: "Khanjahan Ali Road Sub-Branch,KDA Avenue"},
+            {code: "625", name: "Khasherhat Bazar Sub-Branch,Subarnachar"},
+            {code: "106", name: "Khatungonj Br., Ctg."},
+            {code: "240", name: "Khilgaon Br, Dhaka"},
+            {code: "650", name: "Khilkhet Sub-Branch,Nikunja"},
+            {code: "646", name: "Khilpara Bazar Sub-Branch,Chatkhil"},
+            {code: "823", name: "Khoksha Sub-Branch,Kushtia"},
+            {code: "107", name: "Khulna"},
+            {code: "441", name: "Khulshi Branch, Chattogram"},
+            {code: "120", name: "Kishorgonj Br., Kishorgonj."},
+            {code: "169", name: "Kolaroa Br., Satkhira."},
+            {code: "791", name: "Kolatali Sub-Branch.Cox's Bazar"},
+            {code: "338", name: "Konabari Br.,Gazipur."},
+            {code: "717", name: "Konapara Sub-Branch,Jatrabari"},
+            {code: "344", name: "Kosba, B. Baria"},
+            {code: "782", name: "Kotalipara Sub-Branch, Gopalganj"},
+            {code: "300", name: "Kotchandpur Br, Kotchandpur, Jhenaidah."},
+            {code: "682", name: "Kuchaitoly Sub-Branch,Cumilla Chawk Bazar"},
+            {code: "256", name: "Kulaura Br, Moulvibazar"},
+            {code: "236", name: "Kumarkhali Br,Kustia"},
+            {code: "195", name: "Kurigram Br., Kurigram."},
+            {code: "133", name: "Kushtia Br."},
+            {code: "614", name: "Kusumhati Bazar Sub-Branch,Sherpur"},
+            {code: "368", name: "LALMOHAN, BHOLA"},
+            {code: "139", name: "Laksam Br.,Comilla."},
+            {code: "328", name: "Lalbag Branch, Dhaka"},
+            {code: "199", name: "Laldighirpar Br., Sylhet."},
+            {code: "793", name: "Lalkhan Bazar Sub-Branch,Dewanhat"},
+            {code: "253", name: "Lalmonirhat Br, Lalmonirhat"},
+            {code: "439", name: "Lama Br,Bandarban"},
+            {code: "431", name: "Langalbandh Br,Sreepur Magura"},
+            {code: "190", name: "Laxmipur Br., Laxmipur."},
+            {code: "480", name: "Laxmipur Branch,Rajshahi"},
+            {code: "419", name: "Link Road Branch, Cox's Bazar"},
+            {code: "102", name: "Local Office"},
+            {code: "394", name: "Lohagara Br, Narail"},
+            {code: "156", name: "Lohagara Br.,Ctg."},
+            {code: "687", name: "Loharpool Sub-Branch,Shampur"},
+            {code: "217", name: "Madaripur Br., Madaripur"},
+            {code: "171", name: "Madhabdi Br., Narsingdi."},
+            {code: "460", name: "Madhukhali Br.,Faridpur"},
+            {code: "750", name: "Madhumita Sub-Branch,Tongi"},
+            {code: "246", name: "Magura Br, Magura"},
+            {code: "858", name: "Mahendiganj Sub-Branch,Barishal"},
+            {code: "459", name: "Maheshpur Br,Jhenaidah"},
+            {code: "628", name: "Maijdee Bazar Sub-Branch,Maijdee Court"},
+            {code: "225", name: "Maijdee Court Branch"},
+            {code: "629", name: "Malibag Sub-Branch,Rampura"},
+            {code: "389", name: "Manda Br., Naogaon."},
+            {code: "437", name: "Mandari Bazar Br., Laxmipur."},
+            {code: "181", name: "Manikgonj"},
+            {code: "408", name: "Mathbaria Br., Pirojpur."},
+            {code: "305", name: "Matlab, Chandpur"},
+            {code: "296", name: "Mawna Br, Gazipur"},
+            {code: "764", name: "Mazar Road Sub-Branch,Mirpur-1"},
+            {code: "262", name: "Meherpur Br, Meherpur"},
+            {code: "689", name: "Melandah Bazar Sub-Branch,Jamalpur"},
+            {code: "737", name: "Meradia Sub-Branch,Banasree"},
+            {code: "281", name: "Miarhat Br,Pirojpur"},
+            {code: "610", name: "Mirboxtula Sub-Branch,Sylhet"},
+            {code: "733", name: "Mirer Bazar Sub-Branch,Tongi"},
+            {code: "326", name: "Mirerswarai, Chittagong"},
+            {code: "763", name: "Mirhajirbag Chowrasta Sub-Branch,Gandaria"},
+            {code: "131", name: "Mirpur Br., Dhaka."},
+            {code: "415", name: "Mirpur Women Branch"},
+            {code: "210", name: "Mirpur-1 Br.Dhaka"},
+            {code: "373", name: "Mirzapur"},
+            {code: "781", name: "Mistripara Sub-Branch,Boro Bazar"},
+            {code: "555", name: "Mobile Banking(mCash)"},
+            {code: "856", name: "Modhubag Sub-Br.Dhaka"},
+            {code: "250", name: "Modhupur Br, Tangail"},
+            {code: "332", name: "Mogbazar Branch, Dhaka"},
+            {code: "673", name: "Mogultoly Sub-Branch,Cumilla Chawk Bazar"},
+            {code: "308", name: "Mohadevpur, Naogaon"},
+            {code: "191", name: "Mohakhali Br., Dhaka."},
+            {code: "608", name: "Mohammadbag Sub-Branch,Shampur"},
+            {code: "267", name: "Mohammadpur Krishi Market Br, Dhaka"},
+            {code: "843", name: "Mohammadpur Sub-Branch."},
+            {code: "007", name: "Mohastangor Br, Bogra"},
+            {code: "330", name: "Moheshkhali SME/Krishi Branch, Chittagong"},
+            {code: "626", name: "Mohipal Sub-Branch,Feni"},
+            {code: "456", name: "Mohongonj Branch,Netrokona"},
+            {code: "740", name: "Moilapota Moor Sub-Branch.Boro Bazar"},
+            {code: "150", name: "Mongla Br., Bagerhat."},
+            {code: "616", name: "Monipur Sub-Branch,Mirpur"},
+            {code: "714", name: "Monipuri Para Sub-Branch,Farmgate"},
+            {code: "688", name: "Monirampur Sub-Branch,Jashore"},
+            {code: "377", name: "Monohardi"},
+            {code: "241", name: "Moralgonj Br,Bagerhat"},
+            {code: "788", name: "Mostafapur Bus Stand Sub-Branch,Madaripur"},
+            {code: "311", name: "Motijheel, Dhaka"},
+            {code: "671", name: "Motkhola Bazar Sub-Branch,Katiadi,Kishoreganj"},
+            {code: "145", name: "Mouchak Br., Dhaka."},
+            {code: "114", name: "Moulvi Bazar Br., Moulvi Bazar."},
+            {code: "667", name: "Mugda Sub-Branch,Motijheel"},
+            {code: "447", name: "Muksudpur Branch, Gopalganj"},
+            {code: "012", name: "Muktagacha SME Br, Mymensingh"},
+            {code: "828", name: "Munsef Bazar Sub-Branch,Chattogram"},
+            {code: "187", name: "Munshigonj Br., Munshigonj."},
+            {code: "140", name: "Mymensing"},
+            {code: "327", name: "Nabiganj SME/Krishi Branch, Hobiganj"},
+            {code: "277", name: "Nabinagar Br, Brahmanbaria "},
+            {code: "633", name: "Nabinbag Sub-Branch,Khilgaon"},
+            {code: "872", name: "Nachole Sub-Br.Chapai Nawabganj"},
+            {code: "699", name: "Nageshwari Sub-Branch,Bhurungamari"},
+            {code: "754", name: "Nakhalpara Sub-Branch,Farmgate"},
+            {code: "425", name: "Nalitabari Br.Sherpur"},
+            {code: "815", name: "Nandail Chowrasta Sub-Branch,Mymensingh"},
+            {code: "698", name: "Nandan Kanan Sub-Branch,Jubilee Road"},
+            {code: "325", name: "Nandigram, Bogra"},
+            {code: "690", name: "Nandina Bazar Sub-Branch,Jamalpur"},
+            {code: "448", name: "Nangalkot Branch,Cumilla"},
+            {code: "144", name: "Naogaon Br., Naogaon."},
+            {code: "108", name: "Narayangonj Br., N.Gonj."},
+            {code: "357", name: "Naria, Shariatpur"},
+            {code: "119", name: "Narsingdi Br., Narsingdi."},
+            {code: "853", name: "Natherpetua Sub-Branch,Cumilla"},
+            {code: "741", name: "Nathullabad Sub-Branch,Barishal"},
+            {code: "184", name: "Natore"},
+            {code: "605", name: "Natun Bazar Sub-Branch,Baridhara"},
+            {code: "807", name: "Natun Bazar Sub-Branch,Cox's Bazar"},
+            {code: "621", name: "Natun Bazar Sub-Branch,Magura"},
+            {code: "798", name: "Nawabganj Bazar Sub-Br,New Market,Dhaka"},
+            {code: "233", name: "Nawabgonj Branch,Dhaka"},
+            {code: "118", name: "Nawabpur Road Br."},
+            {code: "746", name: "Nayabondor Bazar Sub-Branch,Goalabazar"},
+            {code: "855", name: "Nayadingi Sub-Branch Manikgonj"},
+            {code: "776", name: "Nazimuddin Road Sub-Branch,Chawk Mugaltuly"},
+            {code: "155", name: "Nazipur Br., Naogaon."},
+            {code: "438", name: "Nazirhat Branch,Chattogram"},
+            {code: "298", name: "Nazumiarhat Br, Chittagong"},
+            {code: "260", name: "Netrokona Br, Netrokona"},
+            {code: "279", name: "New Market Br,Rajshahi"},
+            {code: "129", name: "New Market Br., Dhaka."},
+            {code: "818", name: "Niamatpur Sub-Branch,Naogaon"},
+            {code: "631", name: "Niketon Bazar Sub-Branch,Mohakhali"},
+            {code: "410", name: "Nikunja Branch,Dhaka"},
+            {code: "212", name: "Nilphamari Br., Nilphamari."},
+            {code: "399", name: "Nimtola Br.,Munshigonj."},
+            {code: "340", name: "Nitaiganj Br., N.Gonj."},
+            {code: "135", name: "Noapara Br., Jessore."},
+            {code: "703", name: "Nobodoy Bazar Sub-Branch,Mohammadpur Krishi Market"},
+            {code: "263", name: "Norail Br, Norail"},
+            {code: "606", name: "North Shahjahanpur Sub-Branch,VIP ROAD"},
+            {code: "304", name: "O.R. Nizam Road, Chittagong"},
+            {code: "372", name: "Oxyzen Moor Br., Ctg"},
+            {code: "115", name: "Pabna"},
+            {code: "429", name: "Paduar Bazar Bishwa Road Branch"},
+            {code: "692", name: "Pahartali Bazar Sub-Branch,Pahartali "},
+            {code: "202", name: "Pahartali Br.,Ctg."},
+            {code: "232", name: "Paikgacha Branch, Khulna"},
+            {code: "172", name: "Palash Br., Narsingdi."},
+            {code: "457", name: "Palashbari Br.Gaibandha"},
+            {code: "607", name: "Palbari Sub-Branch,Jashore"},
+            {code: "274", name: "Pallabi Br, Mirpur"},
+            {code: "206", name: "Paltan Br., Dhaka."},
+            {code: "369", name: "Panchbibi Br., Joypurhat"},
+            {code: "424", name: "Panchlaish Br,Chattogram"},
+            {code: "243", name: "Panchogar Br, Panchogar"},
+            {code: "390", name: "Pangsha Br,Rajbari."},
+            {code: "290", name: "Panthapath Br, Dhaka"},
+            {code: "021", name: "Parshuram SME Center, Feni"},
+            {code: "453", name: "Patenga Branch,Chattogram"},
+            {code: "322", name: "Patgram, Lalmonirhat"},
+            {code: "812", name: "Pathantuli Road Sub-Branch,Chattogram"},
+            {code: "478", name: "Patharghata Branch, Barguna"},
+            {code: "479", name: "Patherhat Branch"},
+            {code: "163", name: "Patiya Br.,Ctg."},
+            {code: "832", name: "Patiya Pourashava Sub-Branch,Chattogram."},
+            {code: "867", name: "Patkelghata Sub-Branch,Satkhira."},
+            {code: "192", name: "Patuakhali Br., Patuakhali."},
+            {code: "366", name: "Pekua, Coxs Bazar"},
+            {code: "413", name: "Phulpur Branch"},
+            {code: "602", name: "Pirerbag Sub-Branch Agargaon "},
+            {code: "384", name: "Pirganj Branch"},
+            {code: "695", name: "Pirob Bazar Sub-Branch,Bogura"},
+            {code: "200", name: "Pirojpur Br., Pirojpur."},
+            {code: "265", name: "Poradoho Br, Kushtia"},
+            {code: "634", name: "Postogola Sub-Branch,Shampur"},
+            {code: "830", name: "Pulerghat Sub-Branch,Pakundia,Kishoregonj"},
+            {code: "609", name: "Pulhat Sub-Branch,Dinajpur"},
+            {code: "821", name: "Puran Bazar Sub-Branch,Chandpur"},
+            {code: "724", name: "Puratan Bus Stand Sub-Branch,Tangail"},
+            {code: "838", name: "Puraton Bazar Sub-Branch Chapinawabganj"},
+            {code: "834", name: "Puraton Satkhira Sub-Branch,Satkhira."},
+            {code: "411", name: "RANISANKAIL, THAKURGAON"},
+            {code: "800", name: "Rahattarpul Sub-Br,Chattogram"},
+            {code: "235", name: "Raipur Br,Laxmipur"},
+            {code: "395", name: "Raipura Br.Narsingdi"},
+            {code: "393", name: "Rajapur Br.Jhalokati"},
+            {code: "242", name: "Rajbari Br,Rajbari."},
+            {code: "113", name: "Rajshahi"},
+            {code: "254", name: "Ramgonj Br, Laxmipur"},
+            {code: "725", name: "Ramgoti Bazar Sub-Branch,Sonapur"},
+            {code: "644", name: "Ramgoti Jomidarhat Sub-Branch,Hazirhat"},
+            {code: "157", name: "Ramna Br., Dhaka."},
+            {code: "226", name: "Rampura Branch"},
+            {code: "350", name: "Ramu, Coxs Bazar"},
+            {code: "201", name: "Rangamati Br., Rangamati."},
+            {code: "117", name: "Rangpur"},
+            {code: "657", name: "Rangpur Bus Terminal Sub-Branch,Dhap"},
+            {code: "422", name: "Rangunia Br,Chattogram."},
+            {code: "466", name: "Ranirhat Branch,Chattogram"},
+            {code: "313", name: "Raozan, Chittagong "},
+            {code: "638", name: "Rasulbag Sub-Branch,Mohakhali"},
+            {code: "809", name: "Raushanhat Sub-Branch,Chattogram"},
+            {code: "624", name: "Rayer Bazar Sub-Branch,Dhanmondi"},
+            {code: "736", name: "Rayerbag Sub-Branch,Donia"},
+            {code: "850", name: "Reazuddin Bazar Sub-Branch."},
+            {code: "718", name: "Reserve Bazar Sub-Branch,Rangamati"},
+            {code: "669", name: "Roazar Hat Sub-Branch,Rangunia"},
+            {code: "264", name: "Rohanpur Br, Chapai Nawabgonj"},
+            {code: "362", name: "Roumari Branch, Kurigram"},
+            {code: "756", name: "Ruhitpur Sub-Branch,Zinzira Br"},
+            {code: "865", name: "Rupsha Sub-Branch,Khulna "},
+            {code: "359", name: "Sachar Bazar, Kachua, Chandpur"},
+            {code: "771", name: "Sadar Upazilla Sub-Branch,Faridpur"},
+            {code: "197", name: "Sadarghat Br., Dhaka."},
+            {code: "712", name: "Sadullapur Sub-Branch,Gaibandha"},
+            {code: "152", name: "Saidpur Br., Nilphamari."},
+            {code: "464", name: "Sakhipur Br.Tangail"},
+            {code: "426", name: "Salanga Br., Sirajgnj."},
+            {code: "244", name: "Santhia Br, Pabna"},
+            {code: "472", name: "Sarail Branch,Brahmanbaria"},
+            {code: "374", name: "Sarankhola"},
+            {code: "704", name: "Sarkarhat Sub-Branch,Hathazari"},
+            {code: "405", name: "Satkania Br."},
+            {code: "143", name: "Satkhira Br., Satkhira."},
+            {code: "612", name: "Savar Bazar Sub-Branch,Savar"},
+            {code: "130", name: "Savar Br., Dhaka."},
+            {code: "822", name: "Sebarhat Sub-Branch,Noakhali"},
+            {code: "291", name: "Senbagh Br,Noakhali"},
+            {code: "729", name: "Senpara Sub-Branch,Mirpur"},
+            {code: "738", name: "Shafipur Bazar Sub-Branch,Konabari"},
+            {code: "154", name: "Shahjadpur Br., Sirajgonj."},
+            {code: "757", name: "Shahrasti Sub-Branch,Hajigonj"},
+            {code: "795", name: "Shailkupa Sub-Branch,Jhenaidah"},
+            {code: "259", name: "Shampur, Dhaka"},
+            {code: "866", name: "Shamser Para Sub-Branch, Chattogram"},
+            {code: "790", name: "Shamshernagar Sub-Branch.Moulvibazar"},
+            {code: "780", name: "Shankar Sub-Branch,Dhanmondi"},
+            {code: "013", name: "Shantahar SME/Krishi Branch, Bogra"},
+            {code: "349", name: "Shapahar, Naogaon"},
+            {code: "412", name: "Shaporan Branch"},
+            {code: "251", name: "Shariatpur Br, Shariatpur"},
+            {code: "266", name: "Shawndip Br, Chittagong"},
+            {code: "009", name: "Shayestaganj SME/Krishi Branch, Habiganj"},
+            {code: "659", name: "Sheikhpara Bazar Sub-Branch,Jhenaidah"},
+            {code: "752", name: "Sheikhpara Bazar Sub-Branch,Khulna"},
+            {code: "824", name: "Shekherchar Sub-Branch,Narsingdi"},
+            {code: "188", name: "Sherpur Br.-Sherpur"},
+            {code: "347", name: "Shetabgonj,Dinajpur"},
+            {code: "397", name: "Shibaloy Br.Manikgonj"},
+            {code: "468", name: "Shibchar Branch,Madaripur"},
+            {code: "211", name: "Shibgonj Br., C-N-Gonj."},
+            {code: "708", name: "Shibgonj Sub-Branch,Mohastangor"},
+            {code: "663", name: "Shibgonj Sub-Branch,Sylhet"},
+            {code: "467", name: "Shibpur Branch,Narsingdi"},
+            {code: "604", name: "Shimultoly Sub-Branch,Gazipur Chawrasta"},
+            {code: "722", name: "Shorojgonj Sub-Branch,Chuadanga"},
+            {code: "769", name: "Shyambazar Sub-Branch,Sadarghat"},
+            {code: "336", name: "Shyamnagar, Shatkhira"},
+            {code: "209", name: "Shyamoli Br., Dhaka."},
+            {code: "759", name: "Silonia Bazar Sub-Branch,Feni"},
+            {code: "385", name: "Singair Branch"},
+            {code: "414", name: "Singra Branch,Natore"},
+            {code: "149", name: "Sirajgonj Br., Sirajgonj."},
+            {code: "221", name: "Sitakundo Branch"},
+            {code: "721", name: "Somir Munshirhat Bazar Sub-Branch,Senbagh"},
+            {code: "630", name: "Sonagazi Bazar,Sub-Branch,Sonagazi"},
+            {code: "249", name: "Sonagazi Br, Feni"},
+            {code: "747", name: "Sonaimuri Bangla Bazar Sub-Branch,Noakhali"},
+            {code: "360", name: "Sonaimuri,Noakhali"},
+            {code: "660", name: "Sonapur Bazar Sub-Branch,Ramgonj"},
+            {code: "423", name: "Sonapur Branch"},
+            {code: "383", name: "Sonargaon Janapath Road Br."},
+            {code: "020", name: "Sonargoan SME Center, Narayangonj"},
+            {code: "694", name: "Sonatola Bazar Sub-Branch,Sonatola"},
+            {code: "407", name: "Sonatola Br."},
+            {code: "214", name: "Sreemongal Br., Moulvibazar"},
+            {code: "307", name: "Sreenagar, Munshigonj"},
+            {code: "167", name: "Station Road Br.,Ctg."},
+            {code: "354", name: "Subarnachar, Noakhali"},
+            {code: "022", name: "Sujanagar SME Center, Pabna"},
+            {code: "293", name: "Sunamgonj Br, Sylhet"},
+            {code: "302", name: "Sundargonj Br, Gaibandha"},
+            {code: "711", name: "Sunibir Sub-Branch,Mohammadpur Krishi Market"},
+            {code: "787", name: "Swarupkathi Sub-Branch,Miarhat"},
+            {code: "104", name: "Sylhet"},
+            {code: "661", name: "Tajpur Bazar Sub-Branch,Goalabazar"},
+            {code: "758", name: "Tan Bazar Sub-Branch,Nitaiganj"},
+            {code: "159", name: "Tangail Br.,Tangail."},
+            {code: "848", name: "Tanore Sub-Branch."},
+            {code: "178", name: "Tarakandi Br., Jamalpur."},
+            {code: "686", name: "Tejgaon Link Road Sub-Branch,Gulshan Circle-1"},
+            {code: "269", name: "Tekerhat Br, Madaripur"},
+            {code: "147", name: "Teknaf Br.,Cox's Bazar."},
+            {code: "792", name: "Tekpara Sub-Branch,Cox's Bazar"},
+            {code: "685", name: "Tepakhola Sub-Branch,Faridpur"},
+            {code: "450", name: "Terri Bazar Branch,Chattogram"},
+            {code: "194", name: "Thakurgaon"},
+            {code: "666", name: "Thakurgaon Road Sub-Branch,Thakurgaon"},
+            {code: "216", name: "Tongi Br., Gazipur"},
+            {code: "428", name: "Tongibari,Munshigonj"},
+            {code: "271", name: "Torki Bondor, Barishal"},
+            {code: "652", name: "Town Hall Sub-Branch,Mohammadpur Krishi Market"},
+            {code: "674", name: "Trimohoni Sub-Branch,Kushtia"},
+            {code: "345", name: "Trisal, Mymensingh"},
+            {code: "400", name: "Tungipara Br.,Gopalgonj"},
+            {code: "864", name: "Tushvandar Sub-Branch,Lalmonirhat"},
+            {code: "317", name: "Ullapara, Sirajgonj"},
+            {code: "840", name: "Upashahar Sub-Branch,Rajshahi."},
+            {code: "735", name: "Urdu Road Sub-Branch,Lalbag"},
+            {code: "207", name: "Uttara Br., Dhaka."},
+            {code: "223", name: "VIP Road Branch"},
+            {code: "869", name: "Velanagar Sub-Br,Narsingdi"},
+            {code: "622", name: "Wari Sub-Branch,Motijheel"},
+            {code: "418", name: "Wazirpur Branch"},
+            {code: "675", name: "Wireless Moor Sub-Branch,Mouchak"},
+            {code: "351", name: "Wiseghat, Dhaka"},
+            {code: "845", name: "Zakigonj Sub-Branch."},
+            {code: "127", name: "Zinzira Br., Dhaka."},
+            {code: "706", name: "Zinzira Bus Stand Sub-Branch,Zinzira"},
+            {code: "010", name: "Ziranibazar Br, Dhaka"},
+            {code: "309", name: "zindabazar, Sylhet"}
+        ];
+
+        const searchInput = document.getElementById('searchInput');
+        const resultsDiv = document.getElementById('results');
+        const statsDiv = document.getElementById('stats');
+
+        function displayResults(results) {
+            resultsDiv.innerHTML = '';
+            
+            if (results.length === 0) {
+                resultsDiv.innerHTML = `
+                    <div class="no-results">
+                        <span style="font-size: 40px; display:block;">🔍</span>
+                        দুঃখিত, কোনো তথ্য পাওয়া যায়নি! <br> সঠিক বানান লিখে আবার চেষ্টা করুন।
+                    </div>`;
+                statsDiv.innerText = "০টি তথ্য পাওয়া গেছে";
+                return;
+            }
+
+            results.forEach(branch => {
+                const isSubBranch = branch.name.toLowerCase().includes('sub-branch') || branch.name.toLowerCase().includes('sub-br');
+                const typeText = isSubBranch ? 'উপ-শাখা (Sub-Branch)' : 'শাখা (Branch)';
+                
+                const item = document.createElement('div');
+                item.className = 'branch-item';
+                item.innerHTML = `
+                    <div class="branch-info">
+                        <span class="branch-name">${branch.name}</span>
+                        <span class="branch-type">${typeText}</span>
+                    </div>
+                    <span class="branch-code-tag">${branch.code}</span>
+                `;
+                resultsDiv.appendChild(item);
+            });
+
+            statsDiv.innerText = `${results.length}টি তথ্য পাওয়া গেছে`;
+        }
+
+        // শুরুতে সব ডাটা দেখাবে
+        displayResults(branchData);
+
+        // সার্চ ইনপুট ইভেন্ট
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase().trim();
+            
+            const filtered = branchData.filter(branch => {
+                return branch.name.toLowerCase().includes(term) || 
+                       branch.code.includes(term);
+            });
+
+            displayResults(filtered);
+        });
+    </script>
+</body>
+</html>
