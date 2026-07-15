@@ -1,10 +1,11 @@
-# IBBL Kartikpur Agent Banking - Website
+# IBBL Kartikpur Bazar Agent Banking - Website
 
-এটি **ইসলামী ব্যাংক বাংলাদেশ লিমিটেড (IBBL)**-এর কার্তিকপুর (Kartikpur) শাখার একটি তথ্যমূলক ওয়েবসাইট। গ্রাহকদের ডিজিটাল ব্যাংকিং সেবার তথ্য এবং প্রয়োজনীয় যোগাযোগের মাধ্যম হিসেবে এই সাইটটি তৈরি করা হয়েছে।
+এটি **ইসলামী ব্যাংক বাংলাদেশ পিএলসি (IBBPLC)**-এর কার্তিকপুর বাজার আউটলেট (Kartikpur Bazar Outlet) এর একটি তথ্যমূলক ওয়েবসাইট। গ্রাহকদের ডিজিটাল ব্যাংকিং সেবার তথ্য এবং প্রয়োজনীয় যোগাযোগের মাধ্যম হিসেবে এই সাইটটি তৈরি করা হয়েছে।
 
 ## 🌐 লাইভ ডেমো
 আপনি এই লিঙ্কে ওয়েবসাইটটি দেখতে পারেন: [https://ridwanridu.github.io/ibbl-kartikpur/](https://ridwanridu.github.io/ibbl-kartikpur/)
 
+অথবা এই লিঙ্কে ওয়েবসাইটটি দেখতে পারেন: [এখানে](https://ibblkartikpur.page.gd/)
 ## ✨ বৈশিষ্ট্যসমূহ (Features)
 - **সেবা তালিকা:** এজেন্ট ব্যাংকিংয়ের মাধ্যমে পাওয়া সকল সার্ভিসের বিবরণ।
 - **যোগাযোগ:** ব্যাংকের সঠিক ঠিকানা এবং জরুরি ফোন নম্বর।
@@ -19,13 +20,15 @@
 - **GitHub Pages:** হোস্টিংয়ের জন্য।
 
 ## 📷 স্ক্রিনশটস (Screenshots)
-<img width="1010" height="487" alt="Screenshot 2026-01-17 145820" src="https://github.com/user-attachments/assets/b9ead635-c99f-44f0-9803-dc499edc8517" />
-<img width="2019" height="983" alt="Screenshot 2026-01-17 150024" src="https://github.com/user-attachments/assets/5207df5a-e63f-449b-a0fc-5101b8c9e9d9" />
-<img width="2018" height="983" alt="Screenshot 2026-01-17 150006" src="https://github.com/user-attachments/assets/7d6f0937-ce2d-4432-b91b-7f4a66d2e8a9" />
-<img width="2016" height="981" alt="Screenshot 2026-01-17 145912" src="https://github.com/user-attachments/assets/888be8fc-d6ea-4da4-a212-b2152ed5f59b" />
-<img width="2019" height="954" alt="Screenshot 2026-01-17 150106" src="https://github.com/user-attachments/assets/327c80d5-14c5-4976-8451-1ca3fa0a7e81" />
-<img width="2017" height="982" alt="Screenshot 2026-01-17 150054" src="https://github.com/user-attachments/assets/d5b6292c-8c9c-451b-992c-929e7fb3dc4a" />
-
+<img width="1349" height="655" alt="image" src="https://github.com/user-attachments/assets/31f22a8c-c882-4be1-86f9-48745f833bbf" />
+<img width="1350" height="656" alt="image" src="https://github.com/user-attachments/assets/a2404fc8-536f-4009-9679-e8124c6a1555" />
+<img width="1351" height="666" alt="image" src="https://github.com/user-attachments/assets/13d45ea0-ba60-43fa-b5ff-0e28d4a08c55" />
+<img width="1351" height="665" alt="image" src="https://github.com/user-attachments/assets/c8614dbb-9c3c-4cf7-a8e9-dad0fd37615a" />
+<img width="1351" height="665" alt="image" src="https://github.com/user-attachments/assets/8fba1cba-be57-4bf4-863c-8150128a7917" />
+<img width="1352" height="666" alt="image" src="https://github.com/user-attachments/assets/8ec36553-59b4-439e-9230-e035ad737b5f" />
+<img width="1345" height="666" alt="image" src="https://github.com/user-attachments/assets/39bfbb56-394b-4f64-89be-479c6b6f9693" />
+<img width="1348" height="667" alt="image" src="https://github.com/user-attachments/assets/7394ebe1-4da3-4a2c-b23b-b1cbfc2ed6c7" />
+<img width="1348" height="667" alt="image" src="https://github.com/user-attachments/assets/1c73d4d1-a11e-44ac-bbcb-f6dd1d2359a6" />
 
 
 ## 🚀 লোকাল মেশিনে রান করার নিয়ম
